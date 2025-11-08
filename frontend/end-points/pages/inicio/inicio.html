@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inicio-NeonPlaybook</title>
+  <link rel="stylesheet" href="inicio.css">
+  <!-- estilos rápidos para disponer las tarjetas horizontalmente y separadas -->
+  <style>
+    .entrada-hero { padding: 1rem; }
+    .cards-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem; /* separación entre tarjetas */
+      justify-content: flex-start; /* distribuir horizontalmente */
+      align-items: flex-start;
+      margin-top: 1rem;
+    }
+    .card {
+      flex: 0 0 220px; /* ancho fijo por tarjeta para mantener distribución horizontal */
+      box-sizing: border-box;
+    }
+    /* pequeñas mejoras visuales opcionales para que se note la separación */
+    .card { background: #1a1a1a; color: #fff; padding: 0.75rem; border-radius: 6px; }
+    .card-image { height: 120px; background: linear-gradient(135deg,#333,#111); border-radius:4px; margin-bottom:0.5rem; }
+  </style>
+</head>
+<body>
+  <!-- === SIDEBAR === -->
+  <aside class="sidebar">
+    <h2>NeonPlaybook</h2>
+    <nav>
+      <a href="../Entrada/entrada.html">Hogar</a>
+      <a href="../inicio/inicio.html" class="active">Inicio</a>
+      <a href="../reseñas/reseñas.html">Reseñas</a>
+      <a href="../biblioteca/biblioteca.html">Biblioteca</a>
+    </nav>
+
+    <div class="auth-buttons">
+      <button id="loginBtn" class="login-btn">Iniciar Sesión</button>
+      <button id="registerBtn" class="register-btn">Registrarse</button>
+    </div>
+  </aside>
+
+  <!-- === MAIN CONTENT === -->
+  <main class="content">
+    <header class="header">
+      <input type="text" id="search" placeholder="Buscar juegos...">
+      <button onclick="buscar()">Buscar</button>
+    </header>
+
+    <section class="entrada-hero">
+      <h1>Bienvenido a NeonPlaybook</h1>
+      <p>ELIGE EL JUEGO QUE MAS TE GUSTE </p>
+
+      <!-- contenedor de tarjetas: distribuye horizontalmente y añade separación -->
+      <div class="cards-container">
+
+     <div class="card">
+  <div class="card-image"></div>
+  <div class="card-content">
+    <div class="category">Illustration</div>
+    <div class="heading">
+      A heading that must span over two lines
+      <div class="author">By <span class="name">Abi</span> 4 days ago</div>
+    </div>
+  </div>
+</div>
+
+  <div class="card">
+  <div class="card-image"></div>
+  <div class="card-content">
+    <div class="category">Illustration</div>
+    <div class="heading">
+      A heading that must span over two lines
+      <div class="author">By <span class="name">Abi</span> 4 days ago</div>
+    </div>
+  </div>
+</div>
+
+     <div class="card">
+  <div class="card-image"></div>
+  <div class="card-content">
+    <div class="category">Illustration</div>
+    <div class="heading">
+      A heading that must span over two lines
+      <div class="author">By <span class="name">Abi</span> 4 days ago</div>
+    </div>
+  </div>
+</div>
+
+     <div class="card">
+  <div class="card-image"></div>
+  <div class="card-content">
+    <div class="category">Illustration</div>
+    <div class="heading">
+      A heading that must span over two lines
+      <div class="author">By <span class="name">Abi</span> 4 days ago</div>
+    </div>
+  </div>
+</div>
+
+  <!-- cinco tarjetas nuevas (agregadas) -->
+  <div class="card">
+  <div class="card-image"></div>
+  <div class="card-content">
+    <div class="category">Action</div>
+    <div class="heading">
+      Nuevo juego 1
+      <div class="author">By <span class="name">Dev</span> 1 day ago</div>
+    </div>
+  </div>
+</div>
+
+  <div class="card">
+  <div class="card-image"></div>
+  <div class="card-content">
+    <div class="category">Adventure</div>
+    <div class="heading">
+      Nuevo juego 2
+      <div class="author">By <span class="name">Dev</span> 2 days ago</div>
+    </div>
+  </div>
+</div>
+
+  <div class="card">
+  <div class="card-image"></div>
+  <div class="card-content">
+    <div class="category">RPG</div>
+    <div class="heading">
+      Nuevo juego 3
+      <div class="author">By <span class="name">Dev</span> 3 days ago</div>
+    </div>
+  </div>
+</div>
+
+  <div class="card">
+  <div class="card-image"></div>
+  <div class="card-content">
+    <div class="category">Puzzle</div>
+    <div class="heading">
+      Nuevo juego 4
+      <div class="author">By <span class="name">Dev</span> 4 days ago</div>
+    </div>
+  </div>
+</div>
+
+  <div class="card">
+  <div class="card-image"></div>
+  <div class="card-content">
+    <div class="category">Indie</div>
+    <div class="heading">
+      Nuevo juego 5
+      <div class="author">By <span class="name">Dev</span> 5 days ago</div>
+    </div>
+  </div>
+</div>
+
+      </div> <!-- .cards-container -->
+
+    <!-- cerrar la sección y el main para que los modales estén fuera de .entrada-hero -->
+    </section>
+  </main>
+
+  <!-- === MODALES === -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <h2>Iniciar sesión</h2>
+      <form id="loginForm">
+        <input type="text" id="username" placeholder="Nombre de usuario" required>
+        <input type="password" id="password" placeholder="Contraseña" required>
+        <button type="submit">Entrar</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="registerModal" class="modal">
+    <div class="modal-content">
+      <h2>Registrarse</h2>
+      <form id="registerForm">
+        <input type="text" id="regUsername" placeholder="Nombre de usuario" required>
+        <input type="password" id="regPassword" placeholder="Contraseña" required>
+        <button type="submit">Crear cuenta</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="inicio.js"></script>
+</body>
+</html>

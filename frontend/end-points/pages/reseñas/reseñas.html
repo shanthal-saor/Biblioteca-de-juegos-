@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reseñas - NeonPlaybook</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="reseñas.css">
+</head>
+<body>
+  <!-- === SIDEBAR === -->
+  <aside class="sidebar">
+    <h2>NeonPlaybook</h2>
+    <nav>
+      <a href="../Entrada/entrada.html">Hogar</a>
+      <a href="../inicio/inicio.html">Inicio</a>
+      <a href="../reseñas/reseñas.html" class="active">Reseñas</a>
+      <a href="../biblioteca/biblioteca.html">Biblioteca</a>
+    </nav>
+
+    <div class="auth-buttons">
+      <button id="loginBtn" class="login-btn">Iniciar Sesión</button>
+      <button id="registerBtn" class="register-btn">Registrarse</button>
+    </div>
+  </aside>
+
+  <!-- === MAIN CONTENT === -->
+  <main class="content">
+    <header class="header">
+      <input type="text" id="search" placeholder="Buscar juegos...">
+      <button>Buscar</button>
+    </header>
+
+    <section id="reviews-section">
+      <h1>Reseñas de los jugadores</h1>
+
+<section id="reseñas" class="reviews-section">
+
+  <div class="review-card">
+    <div class="image-upload">
+      <label for="upload-img" class="upload-label"> Subir imagen</label>
+      <input type="file" id="upload-img" accept="image/*">
+      <img id="preview-img" src="" alt="Vista previa" class="preview hidden">
+    </div>
+
+    <div class="review-content">
+      <input type="text" id="game-title" placeholder="Nombre del juego" class="game-input">
+
+      <!-- Sistema de calificación con estrellas -->
+      <div class="rating-container">
+        <label class="rating-label">Calificación:</label>
+        <div class="star-rating" id="star-rating">
+          <span class="star" data-rating="1">★</span>
+          <span class="star" data-rating="2">★</span>
+          <span class="star" data-rating="3">★</span>
+          <span class="star" data-rating="4">★</span>
+          <span class="star" data-rating="5">★</span>
+        </div>
+        <span class="rating-text" id="rating-text">Sin calificación</span>
+      </div>
+
+      <textarea id="game-review" placeholder="Escribe aquí tu reseña..." class="review-input"></textarea>
+
+      <button id="save-review" class="save-btn"> Guardar Reseña</button>
+    </div>
+  </div>
+</section>
+
+
+  <div id="posted-reviews"></div>
+</section>
+
+
+      <!-- Contenedor de reseñas -->
+      <div id="listaReseñas" class="review-list"></div>
+    </section>
+  </main>
+
+  <!-- === MODALES === -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <h2>Iniciar sesión</h2>
+      <form id="loginForm">
+        <input type="text" id="username" placeholder="Nombre de usuario" required>
+        <input type="password" id="password" placeholder="Contraseña" required>
+        <button type="submit">Entrar</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="registerModal" class="modal">
+    <div class="modal-content">
+      <h2>Registrarse</h2>
+      <form id="registerForm">
+        <input type="text" id="regUsername" placeholder="Nombre de usuario" required>
+        <input type="password" id="regPassword" placeholder="Contraseña" required>
+        <button type="submit">Crear cuenta</button>
+      </form>
+    </div>
+  </div>
+<script>
+  const uploadInput = document.getElementById('upload-img');
+  const preview = document.getElementById('preview-img');
+
+  uploadInput.addEventListener('change', () => {
+    const file = uploadInput.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = e => {
+        preview.src = e.target.result;
+        preview.classList.remove('hidden');
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+</script>
+
+</script>
+
+</body>
+</html>
