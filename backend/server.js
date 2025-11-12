@@ -124,8 +124,36 @@ app.get('/health', (req, res) => {
 
 // Rutas de usuarios eliminadas para un proyecto sin autenticación
 
-// Usar puerto 3001 para coincidir con el frontend que llama a http://localhost:3001
-const PORT = process.env.PORT || 3001;
+// Usar puerto 3000 para coincidir con el frontend que llama a http://localhost:3000
+const PORT = process.env.PORT || 3000;
+const FRONTEND_DIR = path.join(__dirname, '..', 'frontend', 'end-points');
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(FRONTEND_DIR, 'pages', 'Entrada', 'entrada.html'));
+});
+
+app.use(express.static(FRONTEND_DIR));
+
+app.get('/pages/Entrada/entrada.html', (req, res) => {
+  res.sendFile(path.join(FRONTEND_DIR, 'pages', 'Entrada', 'entrada.html'));
+});
+
+app.get('/pages/inicio/inicio.html', (req, res) => {
+  res.sendFile(path.join(FRONTEND_DIR, 'pages', 'inicio', 'inicio.html'));
+});
+
+app.get('/pages/Biblioteca/biblioteca.html', (req, res) => {
+  res.sendFile(path.join(FRONTEND_DIR, 'pages', 'Biblioteca', 'biblioteca.html'));
+});
+
+app.get('/pages/reseñas/reseñas.html', (req, res) => {
+  res.sendFile(path.join(FRONTEND_DIR, 'pages', 'reseñas', 'reseñas.html'));
+});
+
+app.get('/pages/resenas/resenas.html', (req, res) => {
+  res.sendFile(path.join(FRONTEND_DIR, 'pages', 'reseñas', 'reseñas.html'));
+});
+
 app.listen(PORT, () => {
   console.log(`Servidor backend escuchando en http://localhost:${PORT}`);
 });

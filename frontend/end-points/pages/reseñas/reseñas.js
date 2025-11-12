@@ -118,7 +118,7 @@ form.addEventListener('submit', async (e) => {
 
 async function guardarReseña(r) {
   try {
-    const resp = await fetch('http://localhost:3001/api/resenas', {
+    const resp = await fetch('/api/resenas', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(r)
@@ -136,7 +136,7 @@ async function guardarReseña(r) {
 
 async function cargarReseñas() {
   try {
-    const resp = await fetch('http://localhost:3001/api/resenas');
+    const resp = await fetch('/api/resenas');
     if (!resp.ok) throw new Error('Error al obtener reseñas');
     const reseñas = await resp.json();
     reseñas.forEach(mostrarReseña);
@@ -242,7 +242,7 @@ function mostrarReseña(r) {
 
 async function actualizarLikes(id, nuevosLikes) {
   try {
-    await fetch(`http://localhost:3001/api/resenas/${id}/likes`, {
+    await fetch(`/api/resenas/${id}/likes`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ likes: nuevosLikes })
@@ -259,7 +259,7 @@ async function actualizarLikes(id, nuevosLikes) {
 
 async function editarReseña(id, cambios) {
   try {
-    const resp = await fetch(`http://localhost:3001/api/resenas/${id}`, {
+    const resp = await fetch(`/api/resenas/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(cambios)
@@ -281,7 +281,7 @@ async function editarReseña(id, cambios) {
 
 async function eliminarReseña(id) {
   try {
-    const resp = await fetch(`http://localhost:3001/api/resenas/${id}`, {
+    const resp = await fetch(`/api/resenas/${id}`, {
       method: 'DELETE'
     });
     if (!resp.ok) throw new Error('Error al eliminar reseña');

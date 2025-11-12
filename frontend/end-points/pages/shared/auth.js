@@ -22,7 +22,7 @@
       const user = document.getElementById('username').value.trim();
       const pass = document.getElementById('password').value.trim();
       try {
-        const resp = await fetch('http://localhost:3001/api/usuarios/login', {
+        const resp = await fetch('http://localhost:3000/api/usuarios/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ user, pass })
@@ -46,7 +46,7 @@
       const emailInput = document.getElementById('regEmail');
       const email = emailInput ? emailInput.value.trim() : '';
       try {
-        const resp = await fetch('http://localhost:3001/api/usuarios/register', {
+        const resp = await fetch('http://localhost:3000/api/usuarios/register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ user, pass, email })

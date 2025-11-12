@@ -1,5 +1,7 @@
 import React from 'react'
 import './index.css'
+const FRONTEND_DIR = '/pages/';
+const port = 3000;
 
 export default function App() {
   return (
