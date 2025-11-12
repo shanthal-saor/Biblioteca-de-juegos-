@@ -20,21 +20,38 @@
       <a href="../Biblioteca/biblioteca.html" class="active">Biblioteca</a>
     </nav>
   
-  </aside>
-
+</aside>
   <!-- === CONTENIDO PRINCIPAL === -->
   <main class="content">
     <header class="header">
       <input type="text" id="search" placeholder="Buscar juegos en tu biblioteca...">
-      <button>Buscar</button>
+      <button onclick="buscar()">Buscar</button>
     </header>
 
-    <section class="library-section">
-      <h1>Tu Biblioteca</h1>
-      <div id="libraryGrid" class="games-grid"></div>
+    <section class="hero">
+      <h1>COLECCIONA TUS JUEGOS FAVORITOS</h1>
+      <p>Organiza y accede a tus juegos preferidos en una sola lugar.</p>
     </section>
-  </main>
 
+    <section id="games" class="games-grid"></section>
+  </main>
+ 
+
+     <!-- === BOTÓN FLOTANTE PARA AGREGAR JUEGOS === -->
+  <button id="addGameBtn" class="add-game-btn">+</button>
+
+  <!-- === MODAL PARA AGREGAR JUEGO === -->
+  <div id="addGameModal" class="modal">
+    <div class="modal-content">
+      <h2>Agregar juego</h2>
+      <form id="addGameForm">
+        <input type="text" id="gameName" placeholder="Nombre del juego" required>
+        <button type="submit">Agregar</button>
+      </form>
+    </div>
+  </div>
+  
   <script src="biblioteca.js"></script>
+
 </body>
 </html>
