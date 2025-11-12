@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const MONGODB_URL = process.env.MONGODB_URL || '';
+const MONGODB_URL = 'mongodb+srv://Shanthal11:shan110908.11@bibliotecajs.6cbjf2l.mongodb.net/?appName=BibliotecaJS';
 
 async function connectDB() {
   if (!MONGODB_URL) throw new Error('MONGODB_URL no está configurado');
