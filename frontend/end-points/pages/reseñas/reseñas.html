@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Reseñas - NeonPlaybook</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../shared/global.css">
+  <!-- Eliminado style.css inexistente y mantenido reseñas.css -->
   <link rel="stylesheet" href="reseñas.css">
 </head>
 <body>
@@ -15,13 +16,10 @@
       <a href="../Entrada/entrada.html">Hogar</a>
       <a href="../inicio/inicio.html">Inicio</a>
       <a href="../reseñas/reseñas.html" class="active">Reseñas</a>
-      <a href="../biblioteca/biblioteca.html">Biblioteca</a>
+      <!-- Ajuste de ruta para coincidir con la carpeta 'Biblioteca' -->
+      <a href="../Biblioteca/biblioteca.html">Biblioteca</a>
     </nav>
 
-    <div class="auth-buttons">
-      <button id="loginBtn" class="login-btn">Iniciar Sesión</button>
-      <button id="registerBtn" class="register-btn">Registrarse</button>
-    </div>
   </aside>
 
   <!-- === MAIN CONTENT === -->
@@ -34,41 +32,46 @@
     <section id="reviews-section">
       <h1>Reseñas de los jugadores</h1>
 
-<section id="reseñas" class="reviews-section">
+      <!-- Unificación de estructura: formulario con ids esperados por reseñas.js -->
+      <section id="reseñas" class="reviews-section">
+        <div class="review-card">
+          <!-- Formulario de reseñas -->
+          <form id="reviewForm" class="review-form">
+            <div class="image-upload">
+              <label for="upload-img" class="upload-label"> Subir imagen</label>
+              <input type="file" id="upload-img" accept="image/*">
+              <img id="preview-img" src="" alt="Vista previa" class="preview hidden">
+              <!-- Campo oculto para almacenar el DataURL de la imagen y ser usado por reseñas.js -->
+              <input type="hidden" id="imagenJuego" />
+            </div>
 
-  <div class="review-card">
-    <div class="image-upload">
-      <label for="upload-img" class="upload-label"> Subir imagen</label>
-      <input type="file" id="upload-img" accept="image/*">
-      <img id="preview-img" src="" alt="Vista previa" class="preview hidden">
-    </div>
+            <div class="review-content">
+              <input type="text" id="tituloJuego" placeholder="Nombre del juego" class="game-input" required>
 
-    <div class="review-content">
-      <input type="text" id="game-title" placeholder="Nombre del juego" class="game-input">
+              <!-- Sistema de calificación con estrellas -->
+              <div class="rating-container">
+                <label class="rating-label">Calificación:</label>
+                <div class="star-rating" id="star-rating">
+                  <span class="star" data-rating="1">★</span>
+                  <span class="star" data-rating="2">★</span>
+                  <span class="star" data-rating="3">★</span>
+                  <span class="star" data-rating="4">★</span>
+                  <span class="star" data-rating="5">★</span>
+                </div>
+                <span class="rating-text" id="rating-text">Sin calificación</span>
+              </div>
 
-      <!-- Sistema de calificación con estrellas -->
-      <div class="rating-container">
-        <label class="rating-label">Calificación:</label>
-        <div class="star-rating" id="star-rating">
-          <span class="star" data-rating="1">★</span>
-          <span class="star" data-rating="2">★</span>
-          <span class="star" data-rating="3">★</span>
-          <span class="star" data-rating="4">★</span>
-          <span class="star" data-rating="5">★</span>
+              <textarea id="textoReseña" placeholder="Escribe aquí tu reseña..." class="review-input" required></textarea>
+
+              <button id="save-review" class="save-btn" type="submit">Guardar Reseña</button>
+            </div>
+          </form>
         </div>
-        <span class="rating-text" id="rating-text">Sin calificación</span>
-      </div>
+      </section>
 
-      <textarea id="game-review" placeholder="Escribe aquí tu reseña..." class="review-input"></textarea>
-
-      <button id="save-review" class="save-btn"> Guardar Reseña</button>
-    </div>
-  </div>
-</section>
-
-
-  <div id="posted-reviews"></div>
-</section>
+      <!-- Contenedor de reseñas publicadas -->
+      <div id="listaReseñas" class="review-list"></div>
+    </section>
 
 
       <!-- Contenedor de reseñas -->
@@ -76,46 +79,30 @@
     </section>
   </main>
 
-  <!-- === MODALES === -->
-  <div id="loginModal" class="modal">
-    <div class="modal-content">
-      <h2>Iniciar sesión</h2>
-      <form id="loginForm">
-        <input type="text" id="username" placeholder="Nombre de usuario" required>
-        <input type="password" id="password" placeholder="Contraseña" required>
-        <button type="submit">Entrar</button>
-      </form>
-    </div>
-  </div>
-
-  <div id="registerModal" class="modal">
-    <div class="modal-content">
-      <h2>Registrarse</h2>
-      <form id="registerForm">
-        <input type="text" id="regUsername" placeholder="Nombre de usuario" required>
-        <input type="password" id="regPassword" placeholder="Contraseña" required>
-        <button type="submit">Crear cuenta</button>
-      </form>
-    </div>
-  </div>
+  <!-- Se eliminaron modales de autenticación -->
 <script>
   const uploadInput = document.getElementById('upload-img');
   const preview = document.getElementById('preview-img');
+  const imagenOculta = document.getElementById('imagenJuego');
 
   uploadInput.addEventListener('change', () => {
     const file = uploadInput.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = e => {
-        preview.src = e.target.result;
+        const dataUrl = e.target.result;
+        preview.src = dataUrl;
         preview.classList.remove('hidden');
+        // Guardar DataURL en el input oculto para que reseñas.js lo utilice
+        imagenOculta.value = dataUrl;
       };
       reader.readAsDataURL(file);
     }
   });
 </script>
 
-</script>
+<!-- Lógica principal de la página -->
+<script src="reseñas.js"></script>
 
 </body>
 </html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Biblioteca - NeonPlaybook</title>
+  <link rel="stylesheet" href="../shared/global.css">
+  <link rel="stylesheet" href="biblioteca.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+  <!-- === SIDEBAR === -->
+  <aside class="sidebar">
+    <h2>NeonPlaybook</h2>
+    <nav>
+      <a href="../Entrada/entrada.html">Hogar</a>
+      <a href="../inicio/inicio.html">Inicio</a>
+      <a href="../reseñas/reseñas.html">Reseñas</a>
+      <a href="../Biblioteca/biblioteca.html" class="active">Biblioteca</a>
+    </nav>
+  
+  </aside>
+
+  <!-- === CONTENIDO PRINCIPAL === -->
+  <main class="content">
+    <header class="header">
+      <input type="text" id="search" placeholder="Buscar juegos en tu biblioteca...">
+      <button>Buscar</button>
+    </header>
+
+    <section class="library-section">
+      <h1>Tu Biblioteca</h1>
+      <div id="libraryGrid" class="games-grid"></div>
+    </section>
+  </main>
+
+  <script src="biblioteca.js"></script>
+</body>
+</html>

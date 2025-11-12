@@ -78,11 +78,8 @@ document.addEventListener('DOMContentLoaded', cargarReseñas);
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
 
-  const usuario = localStorage.getItem('usuarioActivo');
-  if (!usuario) {
-    alert('Debes iniciar sesión o registrarte para publicar una reseña.');
-    return;
-  }
+  // Publicación libre: si no hay usuario activo, usar 'Invitado'
+  const usuario = localStorage.getItem('usuarioActivo') || 'Invitado';
 
   if (calificacionSeleccionada === 0) {
     alert('Por favor selecciona una calificación de 1 a 5 estrellas.');
@@ -168,6 +165,10 @@ function mostrarReseña(r) {
             </span>
           </div>
         </div>
+        <div class="review-actions" style="display:flex; gap:8px;">
+          <button class="edit-btn">Editar</button>
+          <button class="delete-btn" style="background:#b23b3b; color:#fff; border:none; border-radius:6px; padding:6px 10px; cursor:pointer;">Eliminar</button>
+        </div>
       </div>
       <div class="review-text">${r.texto}</div>
       <div class="review-meta">
@@ -187,6 +188,8 @@ function mostrarReseña(r) {
   const likeBtn = card.querySelector('.like-btn');
   const dislikeBtn = card.querySelector('.dislike-btn');
   const likeCount = card.querySelector('.like-count');
+  const editBtn = card.querySelector('.edit-btn');
+  const deleteBtn = card.querySelector('.delete-btn');
 
   likeBtn.addEventListener('click', () => {
     r.likes++;
@@ -198,6 +201,40 @@ function mostrarReseña(r) {
     if (r.likes > 0) r.likes--;
     likeCount.textContent = r.likes;
     actualizarLikes(r.id, r.likes);
+  });
+
+  editBtn.addEventListener('click', async () => {
+    const nuevoTitulo = prompt('Editar título', r.titulo);
+    if (nuevoTitulo === null) return; // cancelado
+    const nuevoTexto = prompt('Editar texto de reseña', r.texto);
+    if (nuevoTexto === null) return; // cancelado
+    const nuevaCalificacion = prompt('Editar calificación (1-5)', String(r.calificacion || 0));
+    const cal = Number(nuevaCalificacion);
+    if (!isNaN(cal) && cal >= 1 && cal <= 5) {
+      r.calificacion = cal;
+    }
+
+    // Actualizar en backend o localStorage
+    const actualizado = await editarReseña(r.id, {
+      titulo: nuevoTitulo,
+      texto: nuevoTexto,
+      calificacion: r.calificacion,
+    });
+    if (actualizado) {
+      // Re-render de la tarjeta: reemplazar contenido
+      card.remove();
+      mostrarReseña(actualizado);
+      alert('Reseña actualizada correctamente.');
+    }
+  });
+
+  deleteBtn.addEventListener('click', async () => {
+    if (!confirm('¿Seguro que deseas eliminar esta reseña?')) return;
+    const ok = await eliminarReseña(r.id);
+    if (ok) {
+      card.remove();
+      alert('Reseña eliminada.');
+    }
   });
 
   lista.prepend(card);
@@ -220,48 +257,43 @@ async function actualizarLikes(id, nuevosLikes) {
   }
 }
 
-/* === LOGIN Y REGISTRO === */
-const loginModal = document.getElementById('loginModal');
-const registerModal = document.getElementById('registerModal');
-
-document.getElementById('loginBtn').onclick = () => loginModal.style.display = 'flex';
-document.getElementById('registerBtn').onclick = () => registerModal.style.display = 'flex';
-
-window.onclick = e => {
-  if (e.target === loginModal) loginModal.style.display = 'none';
-  if (e.target === registerModal) registerModal.style.display = 'none';
-};
-
-document.getElementById('loginForm').addEventListener('submit', e => {
-  e.preventDefault();
-  const user = document.getElementById('username').value.trim();
-  const pass = document.getElementById('password').value.trim();
-  const users = JSON.parse(localStorage.getItem('usuarios')) || [];
-  const validUser = users.find(u => u.user === user && u.pass === pass);
-  if (validUser) {
-    localStorage.setItem('usuarioActivo', user);
-    alert(`Bienvenido, ${user}!`);
-    loginModal.style.display = 'none';
-  } else {
-    alert('Usuario o contraseña incorrectos.');
+async function editarReseña(id, cambios) {
+  try {
+    const resp = await fetch(`http://localhost:3001/api/resenas/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(cambios)
+    });
+    if (!resp.ok) throw new Error('Error al editar reseña');
+    return await resp.json();
+  } catch (e) {
+    // Fallback localStorage
+    const reseñas = JSON.parse(localStorage.getItem('reseñas')) || [];
+    const idx = reseñas.findIndex(r => r.id === id);
+    if (idx !== -1) {
+      reseñas[idx] = { ...reseñas[idx], ...cambios };
+      localStorage.setItem('reseñas', JSON.stringify(reseñas));
+      return reseñas[idx];
+    }
+    return null;
   }
-});
+}
 
-document.getElementById('registerForm').addEventListener('submit', e => {
-  e.preventDefault();
-  const user = document.getElementById('regUsername').value.trim();
-  const pass = document.getElementById('regPassword').value.trim();
-  const users = JSON.parse(localStorage.getItem('usuarios')) || [];
-  if (users.find(u => u.user === user)) {
-    alert('Ese usuario ya existe.');
-  } else {
-    users.push({ user, pass });
-    localStorage.setItem('usuarios', JSON.stringify(users));
-    alert('Cuenta creada correctamente.');
-    registerModal.style.display = 'none';
-
-    // Limpiar campos de registro
-    document.getElementById('regUsername').value = '';
-    document.getElementById('regPassword').value = '';
+async function eliminarReseña(id) {
+  try {
+    const resp = await fetch(`http://localhost:3001/api/resenas/${id}`, {
+      method: 'DELETE'
+    });
+    if (!resp.ok) throw new Error('Error al eliminar reseña');
+    return true;
+  } catch (e) {
+    // Fallback localStorage
+    const reseñas = JSON.parse(localStorage.getItem('reseñas')) || [];
+    const nuevas = reseñas.filter(r => r.id !== id);
+    localStorage.setItem('reseñas', JSON.stringify(nuevas));
+    return true;
   }
-});
+}
+
+// === LOGIN Y REGISTRO ===
+// Ahora la autenticación se gestiona en pages/shared/auth.js.
