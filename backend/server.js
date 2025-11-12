@@ -1,11 +1,8 @@
-// Backend API para reseñas
-// Servidor Express con persistencia simple en archivo JSON
-
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
-
 const app = express();
+const port = 3000;
 app.use(express.json());
 
 // CORS básico para permitir peticiones desde el frontend (Vite dev server)
@@ -17,12 +14,10 @@ app.use((req, res, next) => {
   next();
 });
 
-// Ubicación del archivo de datos
 const DATA_DIR = path.join(__dirname, 'data');
 const DATA_FILE = path.join(DATA_DIR, 'resenas.json');
-// Autenticación eliminada: ya no se usa archivo de usuarios
 
-// Asegurar que el directorio y archivo existan
+
 function ensureStorage() {
   if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
   if (!fs.existsSync(DATA_FILE)) fs.writeFileSync(DATA_FILE, '[]', 'utf-8');
@@ -34,7 +29,7 @@ function readReviews() {
     const raw = fs.readFileSync(DATA_FILE, 'utf-8');
     return JSON.parse(raw);
   } catch (e) {
-    // Si hay error leyendo o parseando, re-inicializar
+    
     fs.writeFileSync(DATA_FILE, '[]', 'utf-8');
     return [];
   }
@@ -45,7 +40,7 @@ function writeReviews(list) {
   fs.writeFileSync(DATA_FILE, JSON.stringify(list, null, 2), 'utf-8');
 }
 
-// Funciones de usuarios eliminadas
+
 
 // Rutas API
 app.get('/api/resenas', (req, res) => {
@@ -55,10 +50,10 @@ app.get('/api/resenas', (req, res) => {
 
 app.post('/api/resenas', (req, res) => {
   const body = req.body || {};
-  const { usuario, titulo, imagen, texto, fecha, calificacion } = body;
+  const { usuario, titulo, imagen, texto, level, fecha, calificacion } = body;
 
-  if (!titulo || !texto) {
-    return res.status(400).json({ error: 'Faltan campos requeridos: titulo, texto' });
+  if (!titulo || !texto || !level) {
+    return res.status(400).json({ error: 'Faltan campos requeridos: titulo, texto, level' });
   }
 
   const reseñas = readReviews();
@@ -68,6 +63,7 @@ app.post('/api/resenas', (req, res) => {
     titulo,
     imagen: imagen || 'img/placeholder.jpg',
     texto,
+    level,
     fecha: fecha || new Date().toISOString(),
     calificacion: calificacion !== undefined ? Number(calificacion) || 0 : 0,
     likes: Number(body.likes) || 0,
@@ -89,10 +85,13 @@ app.put('/api/resenas/:id/likes', (req, res) => {
   res.json({ id: reseñas[idx].id, likes: reseñas[idx].likes });
 });
 
-// Editar reseña (titulo, texto, imagen, calificacion)
+// Editar reseña (titulo, texto, imagen, calificacion, level)
 app.put('/api/resenas/:id', (req, res) => {
   const { id } = req.params;
-  const { titulo, texto, imagen, calificacion } = req.body || {};
+  const { titulo, texto, imagen, calificacion, level } = req.body || {};
+  if (!titulo && !texto && !level) {
+    return res.status(400).json({ error: 'Faltan campos requeridos: titulo, texto, level' });
+  }
   const reseñas = readReviews();
   const idx = reseñas.findIndex(r => String(r.id) === String(id));
   if (idx === -1) return res.status(404).json({ error: 'Reseña no encontrada' });
@@ -101,6 +100,7 @@ app.put('/api/resenas/:id', (req, res) => {
   if (typeof texto === 'string') reseñas[idx].texto = texto;
   if (typeof imagen === 'string' && imagen.length) reseñas[idx].imagen = imagen;
   if (calificacion !== undefined) reseñas[idx].calificacion = Number(calificacion) || 0;
+  if (typeof level === 'string') reseñas[idx].level = level;
 
   writeReviews(reseñas);
   res.json(reseñas[idx]);
@@ -117,7 +117,7 @@ app.delete('/api/resenas/:id', (req, res) => {
   res.json({ ok: true, id: eliminada.id });
 });
 
-// Salud
+
 app.get('/health', (req, res) => {
   res.json({ ok: true });
 });
