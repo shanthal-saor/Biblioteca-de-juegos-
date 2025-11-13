@@ -1,6 +1,6 @@
 import React from 'react'
 import './index.css'
-const FRONTEND_DIR = '/pages/';
+const FRONTEND_DIR = '/src/pages/';
 const port = 3000;
 export default function HomePage() {
   return (
@@ -8,9 +8,9 @@ export default function HomePage() {
       <header className="w-full flex justify-between items-center px-10 py-6">
         <h1 className="text-3xl font-extrabold tracking-tight">NeonPlaybook</h1>
         <nav className="flex gap-8 text-lg font-medium">
-          <a href={FRONTEND_DIR + "hogar/App.jsx"} className="active hover:text-purple-300 transition">Hogar</a>
-          <a href={FRONTEND_DIR + 'Inicio/inicio.html'} className="hover:text-purple-300 transition">Inicio</a>
-          <a href={FRONTEND_DIR + 'Reseñas/reseñas.html'} className="hover:text-purple-300 transition">Reseñas</a>
+          <a href={'/'} className="active hover:text-purple-300 transition">Hogar</a>
+          <a href={FRONTEND_DIR + 'inicio/inicio.html'} className="hover:text-purple-300 transition">Inicio</a>
+          <a href={FRONTEND_DIR + 'reseñas/reseñas.html'} className="hover:text-purple-300 transition">Reseñas</a>
           <a href={FRONTEND_DIR + 'Biblioteca/biblioteca.html'} className="hover:text-purple-300 transition">Biblioteca</a>
         </nav>
       </header>
