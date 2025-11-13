@@ -4,21 +4,37 @@ const FRONTEND_DIR = '/pages/';
 const port = 3000;
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-purple-900 via-purple-800 to-purple-700 text-white relative overflow-hidden flex flex-col">
-      {/* Header */}
+    <div className="min-h-screen text-white relative overflow-hidden flex flex-col arcade-bg">
       <header className="w-full flex justify-between items-center px-10 py-6">
         <h1 className="text-3xl font-extrabold tracking-tight">NeonPlaybook</h1>
         <nav className="flex gap-8 text-lg font-medium">
-          <a href={FRONTEND_DIR + "hogar/App.jsx"} class="active"className="hover:text-purple-300 transition">Hogar</a>
+          <a href={FRONTEND_DIR + "hogar/App.jsx"} className="active hover:text-purple-300 transition">Hogar</a>
           <a href={FRONTEND_DIR + 'Inicio/inicio.html'} className="hover:text-purple-300 transition">Inicio</a>
           <a href={FRONTEND_DIR + 'Reseñas/reseñas.html'} className="hover:text-purple-300 transition">Reseñas</a>
           <a href={FRONTEND_DIR + 'Biblioteca/biblioteca.html'} className="hover:text-purple-300 transition">Biblioteca</a>
         </nav>
       </header>
 
-      {/* Main Section */}
+      <div className="arcade-wrapper">
+        <div className="arcade-marquee">NeonPlaybook</div>
+        <div className="arcade-screen">
+          <div className="arcade-title">Press Start</div>
+          <div className="arcade-progress"><div className="arcade-progress-bar" style={{width:'42%'}}></div></div>
+        </div>
+        <div className="arcade-controls">
+          <div className="joystick">
+            <div className="stick"></div>
+            <div className="base"></div>
+          </div>
+          <button className="arcade-btn pink">Start</button>
+          <button className="arcade-btn yellow">Select</button>
+          <button className="arcade-btn cyan">A</button>
+          <button className="arcade-btn cyan">B</button>
+        </div>
+      </div>
+
       <main className="flex-1 flex flex-col items-center justify-center text-center px-6">
-        <h2 className="text-5xl font-extrabold mb-6">Bienvenido a NeonPlaybook</h2>
+        <h1 className="text-5xl font-extrabold mb-6">Bienvenido a NeonPlaybook</h1>
         <p className="max-w-2xl text-lg opacity-90 leading-relaxed mb-10">
           Un espacio creado para los jugadores que buscan compartir sus opiniones, descubrir nuevos títulos y guardar sus juegos favoritos. 
           Aquí podrás dejar tu huella en la comunidad gamer, reseñar, opinar y explorar el vasto universo del gaming, todo bajo un ambiente iluminado por el brillo del neón morado.
@@ -54,7 +70,6 @@ export default function HomePage() {
         </div>
       </main>
 
-      {/* Gallery Section */}
       <section className="w-full bg-purple-950 py-10 px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <div className="rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition">
           <img src="https://i.pinimg.com/736x/e0/91/c4/e091c408c0a5788e4d81c6bcdfc24e3b.jpg" alt="imagen 1" className="w-full h-60 object-cover" />
@@ -70,7 +85,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="py-6 text-center text-sm opacity-80">
         © {new Date().getFullYear()} NeonPlaybook — Creado para los gamers apasionados.
       </footer>

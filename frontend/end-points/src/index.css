@@ -125,3 +125,20 @@ footer {
   opacity: 0.8;
   background: transparent;
 }
+
+.arcade-bg { background: radial-gradient(1200px circle at 50% 120%, #18052e 0, #0c0620 55%, #050316 100%); }
+.arcade-wrapper { width: 100%; max-width: 1100px; margin: 0 auto; padding: 2rem; position: relative; }
+.arcade-marquee { width: 80%; height: 38px; margin: 0 auto -10px auto; border-radius: 10px; background: linear-gradient(90deg,#ff007a,#ffd600,#00e5ff); box-shadow: 0 0 18px rgba(255,214,0,.45); text-align: center; font-weight: 800; letter-spacing: .6px; color: #0c0c12; }
+.arcade-screen { background: #0a0a0f; border: 4px solid #7c5cff; border-radius: 14px; box-shadow: 0 0 22px rgba(124,92,255,.5), inset 0 0 10px rgba(124,92,255,.25); padding: 1.5rem; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+.arcade-title { font-size: 2rem; font-weight: 900; color: #ffd600; text-shadow: 0 0 10px #7c5cff, 0 0 20px #ffd600; }
+.arcade-progress { width: 60%; height: 10px; border-radius: 999px; background: #1a1b22; border: 1px solid #292b38; overflow: hidden; }
+.arcade-progress-bar { height: 100%; background: linear-gradient(90deg,#5b4bff,#7c5cff); box-shadow: 0 0 16px rgba(124,92,255,.6); }
+.arcade-controls { display: flex; align-items: center; gap: 16px; padding: 1rem; justify-content: center; }
+.joystick { position: relative; width: 80px; height: 80px; margin-right: 8px; }
+.joystick .base { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 80px; height: 28px; background: #1a1b22; border: 2px solid #2b2f3e; border-radius: 14px; box-shadow: 0 0 10px rgba(124,92,255,.35); }
+.joystick .stick { position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%); width: 12px; height: 42px; background: #7c5cff; border-radius: 6px; box-shadow: 0 0 10px rgba(124,92,255,.8); }
+.arcade-btn { border: none; border-radius: 999px; padding: 12px 18px; font-weight: 800; color: #0c0c12; cursor: pointer; box-shadow: 0 0 14px rgba(124,92,255,.45); transition: transform .15s, filter .15s; }
+.arcade-btn:hover { transform: translateY(-2px); filter: brightness(1.05); }
+.arcade-btn.pink { background: #ff007a; }
+.arcade-btn.yellow { background: #ffd600; }
+.arcade-btn.cyan { background: #00e5ff; }
