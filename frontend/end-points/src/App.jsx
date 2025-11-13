@@ -9,6 +9,7 @@ export default function HomePage() {
       <header className="w-full flex justify-between items-center px-10 py-6">
         <h1 className="text-3xl font-extrabold tracking-tight">NeonPlaybook</h1>
         <nav className="flex gap-8 text-lg font-medium">
+          <a href={FRONTEND_DIR + "hogar/App.jsx"} class="active"className="hover:text-purple-300 transition">Hogar</a>
           <a href={FRONTEND_DIR + 'Inicio/inicio.html'} className="hover:text-purple-300 transition">Inicio</a>
           <a href={FRONTEND_DIR + 'Reseñas/reseñas.html'} className="hover:text-purple-300 transition">Reseñas</a>
           <a href={FRONTEND_DIR + 'Biblioteca/biblioteca.html'} className="hover:text-purple-300 transition">Biblioteca</a>
@@ -56,16 +57,16 @@ export default function HomePage() {
       {/* Gallery Section */}
       <section className="w-full bg-purple-950 py-10 px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <div className="rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition">
-          <img src="https://images.unsplash.com/photo-1612036782181-1b9e8d4bba4f?auto=format&fit=crop&w=600&q=80" alt="zorro 1" className="w-full h-60 object-cover" />
+          <img src="https://i.pinimg.com/736x/e0/91/c4/e091c408c0a5788e4d81c6bcdfc24e3b.jpg" alt="imagen 1" className="w-full h-60 object-cover" />
         </div>
         <div className="rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition">
-          <img src="https://images.unsplash.com/photo-1612036764971-fb6b0b72e11d?auto=format&fit=crop&w=600&q=80" alt="zorro 2" className="w-full h-60 object-cover" />
+          <img src="https://i.pinimg.com/736x/d4/dc/14/d4dc143abba2b4adc7fb660463a381b5.jpg" alt="imagen 2" className="w-full h-60 object-cover" />
         </div>
         <div className="rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition">
-          <img src="https://images.unsplash.com/photo-1612036794115-bfcae54fbc32?auto=format&fit=crop&w=600&q=80" alt="videojuego 1" className="w-full h-60 object-cover" />
+          <img src="https://i.pinimg.com/1200x/3b/5d/11/3b5d11d438f6b2895a6d82dc4fe7677e.jpg" alt="imagen 3" className="w-full h-60 object-cover" />
         </div>
         <div className="rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition">
-          <img src="https://images.unsplash.com/photo-1580128637422-75a22501fc8c?auto=format&fit=crop&w=600&q=80" alt="videojuego 2" className="w-full h-60 object-cover" />
+          <img src="https://i.pinimg.com/736x/e5/96/20/e596202e573beb0f88e0bedfbe019f3e.jpg" alt="imagen 4" className="w-full h-60 object-cover" />
         </div>
       </section>
 
