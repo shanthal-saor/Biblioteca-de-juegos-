@@ -71,3 +71,7 @@
   font-size: 0.85rem;
 }
 
+.content { background-image: linear-gradient(rgba(156,124,255,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(156,124,255,.08) 1px, transparent 1px); background-size: 24px 24px; background-position: 0 0; }
+.hero h1 { color:#ffd600; text-shadow: 0 0 10px #7c5cff, 0 0 20px #ffd600; }
+.header button:hover { box-shadow: 0 0 12px rgba(124,92,255,.6); }
+

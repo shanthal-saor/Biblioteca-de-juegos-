@@ -13,9 +13,9 @@
   <aside class="sidebar">
     <h2>NeonPlaybook</h2>
     <nav>
+        <a href="hogar/App.jsx">Hogar</a>
       <a href="../inicio/inicio.html">Inicio</a>
       <a href="../reseñas/reseñas.html" class="active">Reseñas</a>
-      <!-- Ajuste de ruta para coincidir con la carpeta 'Biblioteca' -->
       <a href="../Biblioteca/biblioteca.html">Biblioteca</a>
     </nav>
 
@@ -45,7 +45,17 @@
             </div>
 
             <div class="review-content">
+              <input type="text" id="nombreUsuario" placeholder="Tu nombre" class="game-input" required>
               <input type="text" id="tituloJuego" placeholder="Nombre del juego" class="game-input" required>
+
+              <div class="difficulty">
+                <label for="nivelDificultad" class="difficulty-label">Nivel de dificultad</label>
+                <select id="nivelDificultad" class="difficulty-select">
+                  <option value="facil">Fácil</option>
+                  <option value="intermedio">Intermedio</option>
+                  <option value="dificil">Difícil</option>
+                </select>
+              </div>
 
               <!-- Sistema de calificación con estrellas -->
               <div class="rating-container">

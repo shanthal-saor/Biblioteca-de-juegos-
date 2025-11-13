@@ -116,6 +116,10 @@ body {
 }
 .header button:hover { background:#7b5cf5; }
 
+.content { background-image: linear-gradient(rgba(156,124,255,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(156,124,255,.08) 1px, transparent 1px); background-size: 24px 24px; background-position: 0 0; }
+.hero h1 { color:#ffd600; text-shadow: 0 0 10px #7c5cff, 0 0 20px #ffd600; }
+.header button:hover { background:#7b5cf5; box-shadow: 0 0 12px rgba(124,92,255,.6); }
+
 /* HERO SECTION */
 .hero { margin-bottom:25px; }
 .hero h1 { font-size:2rem; font-weight:700; margin-bottom:5px; }

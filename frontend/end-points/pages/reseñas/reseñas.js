@@ -78,8 +78,8 @@ document.addEventListener('DOMContentLoaded', cargarReseñas);
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
 
-  // Publicación libre: si no hay usuario activo, usar 'Invitado'
-  const usuario = localStorage.getItem('usuarioActivo') || 'Invitado';
+  // Nombre de usuario desde formulario; si no hay, usar activo o 'Invitado'
+  const usuario = (document.getElementById('nombreUsuario')?.value.trim()) || localStorage.getItem('usuarioActivo') || 'Invitado';
 
   if (calificacionSeleccionada === 0) {
     alert('Por favor selecciona una calificación de 1 a 5 estrellas.');
@@ -89,6 +89,7 @@ form.addEventListener('submit', async (e) => {
   const titulo = document.getElementById('tituloJuego').value.trim();
   const imagen = document.getElementById('imagenJuego').value.trim() || 'img/placeholder.jpg';
   const texto = document.getElementById('textoReseña').value.trim();
+  const level = document.getElementById('nivelDificultad') ? document.getElementById('nivelDificultad').value : 'intermedio';
   const fecha = new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' });
 
   const reseña = { 
@@ -96,6 +97,7 @@ form.addEventListener('submit', async (e) => {
     titulo, 
     imagen, 
     texto, 
+    level,
     fecha, 
     calificacion: calificacionSeleccionada,
     likes: 0
@@ -163,6 +165,7 @@ function mostrarReseña(r) {
             <span style="margin-left: 8px; font-size: 0.9rem; color: #aaa;">
               (${r.calificacion || 0}/5)
             </span>
+            <span class="level-badge">${(r.level || 'intermedio').toUpperCase()}</span>
           </div>
         </div>
         <div class="review-actions" style="display:flex; gap:8px;">
