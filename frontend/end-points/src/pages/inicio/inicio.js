@@ -50,3 +50,167 @@ if (registerForm) {
 }
 
 
+const API_BASE = 'http://localhost:3000'
+let allGames = []
+
+function normalizeGame(g) {
+  return {
+    id: g.id,
+    titulo: g.titulo || g.name || 'Sin título',
+    cover: g.cover || g.image || '',
+    genero: g.genero || g.genre || '',
+    fecha: g.fecha || g.Fechadecreaccion || '',
+    compania: g.compania || g.company || '',
+    descripcion: g.descripcion || g.description || '',
+    plataformas: Array.isArray(g.plataformas) ? g.plataformas : [],
+  }
+}
+
+async function fetchJuegos() {
+  try {
+    const res = await fetch(`${API_BASE}/api/juegos`)
+    if (!res.ok) throw new Error('No se pudo cargar juegos')
+    const data = await res.json()
+    return Array.isArray(data) ? data.map(normalizeGame) : []
+  } catch (e) {
+    console.error(e)
+    return []
+  }
+}
+
+function createCard(game) {
+  const card = document.createElement('div')
+  card.className = 'game-card arcade-card'
+  card.setAttribute('data-id', game.id)
+
+  card.innerHTML = `
+    <div class="card-preview">
+      <img src="${game.cover}" alt="${game.titulo}" onerror="this.src='https://via.placeholder.com/280x160?text=No+Image'" />
+      <h3 class="title">${game.titulo}</h3>
+    </div>
+  `
+
+  const preview = card.querySelector('.card-preview')
+  preview.addEventListener('click', () => {
+    showDetail(game, card)
+  })
+
+  return card
+}
+
+let detailOverlay
+let overlayAnchor
+
+function ensureDetailOverlay() {
+  if (!detailOverlay) {
+    detailOverlay = document.createElement('div')
+    detailOverlay.className = 'detail-popover arcade-card'
+    document.body.appendChild(detailOverlay)
+    detailOverlay.style.display = 'none'
+  }
+  return detailOverlay
+}
+
+function hideDetail() {
+  const el = ensureDetailOverlay()
+  el.style.display = 'none'
+  el.innerHTML = ''
+  overlayAnchor = null
+}
+
+function showDetail(game, anchor) {
+  const el = ensureDetailOverlay()
+  overlayAnchor = anchor
+  const rect = anchor.getBoundingClientRect()
+  el.style.position = 'absolute'
+  el.style.left = `${rect.left + window.scrollX}px`
+  el.style.top = `${rect.top + window.scrollY}px`
+  el.style.width = `${rect.width}px`
+  el.innerHTML = `
+    <div class="expanded-grid">
+      <div class="expanded-cover">
+        <img src="${game.cover}" alt="${game.titulo}" onerror="this.src='https://via.placeholder.com/420x240?text=No+Image'" />
+      </div>
+      <div class="expanded-info">
+        <h3>${game.titulo}</h3>
+        <p><strong>Género:</strong> ${game.genero || 'N/D'}</p>
+        <p><strong>Fecha:</strong> ${game.fecha || 'N/D'}</p>
+        <p><strong>Compañía:</strong> ${game.compania || 'N/D'}</p>
+        ${game.plataformas.length ? `<p><strong>Plataformas:</strong> ${game.plataformas.join(', ')}</p>` : ''}
+        <p class="descripcion">${game.descripcion || ''}</p>
+      </div>
+    </div>
+  `
+  el.style.display = 'block'
+}
+
+document.addEventListener('click', (e) => {
+  const el = ensureDetailOverlay()
+  if (el.style.display !== 'none') {
+    if (!el.contains(e.target) && (!overlayAnchor || !overlayAnchor.contains(e.target))) {
+      hideDetail()
+    }
+  }
+})
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') hideDetail()
+})
+
+async function renderJuegos() {
+  const container = document.querySelector('.cards-container') || document.querySelector('.games-grid')
+  if (!container) return
+  if (!allGames.length) allGames = await fetchJuegos()
+  const queryEl = document.getElementById('search')
+  const q = (queryEl && queryEl.value) ? queryEl.value.trim().toLowerCase() : ''
+  const filtered = q
+    ? allGames.filter(g => g.titulo.toLowerCase().startsWith(q))
+    : allGames
+  container.innerHTML = ''
+  filtered.forEach(j => container.appendChild(createCard(j)))
+  renderSearchSuggestions(q)
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderJuegos()
+  const input = document.getElementById('search')
+  if (input) {
+    input.addEventListener('input', () => renderJuegos())
+  }
+})
+
+function ensureSuggestionsContainer() {
+  const header = document.querySelector('.header')
+  if (!header) return null
+  let box = header.querySelector('.search-suggestions')
+  if (!box) {
+    box = document.createElement('div')
+    box.className = 'search-suggestions'
+    header.appendChild(box)
+  }
+  return box
+}
+
+function renderSearchSuggestions(q) {
+  const box = ensureSuggestionsContainer()
+  if (!box) return
+  if (!q) { box.innerHTML = ''; box.style.display = 'none'; return }
+  const matches = allGames
+    .filter(g => g.titulo.toLowerCase().includes(q))
+    .slice(0, 6)
+  box.innerHTML = matches.map(m => `<div class="suggestion-item" data-id="${m.id}">${m.titulo}</div>`).join('')
+  box.style.display = matches.length ? 'block' : 'none'
+  box.querySelectorAll('.suggestion-item').forEach(el => {
+    el.addEventListener('click', () => {
+      const input = document.getElementById('search')
+      if (input) input.value = el.textContent
+      renderJuegos()
+    })
+  })
+}
+
+function buscar() {
+  renderJuegos()
+}
+
+

@@ -1,0 +1,335 @@
+[
+  {
+    "name": "The Legend of Zelda: Breath of the Wild",
+    "genre": "Aventura-Acción",
+    "Fechadecreaccion": 2017,
+    "description": "Una obra maestra de Nintendo que redefine los juegos de mundo abierto. Explora el vasto reino de Hyrule como Link, resolviendo puzzles, combatiendo enemigos y descubriendo secretos en un mundo donde la libertad y la exploración son ilimitadas.",
+    "image": "https://assets.nintendo.com/image/upload/q_auto/f_auto/store/software/switch2/70050000057001/cfe9f8d674be958326d3ba11fc7598a4383e5c5d7809b6239ccac0783aac6cd8",
+    "compania": "Nintendo",
+    "id": "2"
+  },
+  {
+    "name": "Minecraft",
+    "genre": "Sandbox",
+    "Fechadecreaccion": 2011,
+    "description": "El juego más vendido de la historia, Minecraft es un sandbox donde la creatividad no tiene límites. Construye, explora y sobrevive en un mundo generado proceduralmente hecho completamente de bloques. Incluye modos Supervivencia, Creativo y Aventura.",
+    "image": "https://xboxwire.thesourcemediaassets.com/sites/4/15YR_Free_Cape-1-7cbcb0739e3df57534ec-9063efed017354d1b1c3.jpg",
+    "compania": "Mojang Studios",
+    "id": "3"
+  },
+  {
+    "name": "Cyberpunk 2077",
+    "genre": "RPG",
+    "Fechadecreaccion": 2020,
+    "description": "Un RPG de mundo abierto ambientado en Night City, una metrópolis obsesionada con el poder, el glamour y las modificaciones corporales. Vive la vida de un mercenario y descubre un universo lleno de decisiones que cambian la historia.",
+    "image": "https://www.cyberpunk.net/build/images/social-thumbnail-en-ddcf4d23.jpg",
+    "compania": "CD Projekt Red",
+    "id": "4"
+  },
+  {
+    "name": "Call of Duty: Modern Warfare",
+    "genre": "Shooter en Primera Persona",
+    "Fechadecreaccion": 2019,
+    "description": "La reinvención de la aclamada serie Call of Duty. Experimenta una campaña intensa y realista, además de un multijugador competitivo que redefine los shooters modernos con gráficos de última generación y mecánicas de juego pulidas.",
+    "image": "https://alfabetajuega.com/hero/2021/08/call-of-duty-modern-warfare-guia-completa.jpg?width=768&aspect_ratio=16:9&format=nowebp",
+    "compania": "Infinity Ward",
+    "id": "5"
+  },
+  {
+    "name": "Halo: Combat Evolved",
+    "genre": "Shooter en Primera Persona",
+    "Fechadecreaccion": 2001,
+    "description": "El juego que definió la Xbox original. Como el Jefe Maestro, defiende a la humanidad de la amenaza alienígena del Covenant en este shooter revolucionario que combinó una campaña épica con multijugador innovador.",
+    "image": "https://xboxwire.thesourcemediaassets.com/sites/4/HaloCE_Wallpaper_Desktop-4K_3840x2160_RGB-261bcd805fce72df70e7.jpg",
+    "compania": "Bungie",
+    "id": "6"
+  },
+  {
+    "name": "Fortnite",
+    "genre": "Battle Royale",
+    "Fechadecreaccion": 2017,
+    "description": "El fenómeno cultural que popularizó el género battle royale. 100 jugadores caen en una isla y luchan hasta que queda uno en pie, con la única característica de construcción que permite crear estructuras defensivas y ofensivas.",
+    "image": "https://i.ytimg.com/vi/adGdyCdvKz4/maxresdefault.jpg",
+    "compania": "Epic Games",
+    "id": "7"
+  },
+  {
+    "name": "Super Mario Bros",
+    "genre": "Plataformas",
+    "Fechadecreaccion": 1985,
+    "description": "El juego que revolucionó los videojuegos de plataformas. Controla a Mario mientras salta entre plataformas, elimina enemigos y rescata a la Princesa Peach del malvado Bowser en el Reino Champiñón.",
+    "image": "https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1240/b_white/f_auto/q_auto/store/software/switch/70010000006411/73d58198e35bf94be752cf3d9ba0b44dea877cab1487e2cc1b7eeb02157f066f",
+    "compania": "Nintendo",
+    "id": "8"
+  },
+  {
+    "name": "Pac-Man",
+    "genre": "Arcade",
+    "Fechadecreaccion": 1980,
+    "description": "El icónico juego de arcade donde controlas a Pac-Man, un círculo amarillo que debe comer todos los puntos en un laberinto mientras evita a los fantasmas Blinky, Pinky, Inky y Clyde.",
+    "image": "https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2022/04/pac-man-2682107.jpg?tf=3840x",
+    "compania": "Namco",
+    "id": "9"
+  },
+  {
+    "name": "Sonic the Hedgehog",
+    "genre": "Plataformas",
+    "Fechadecreaccion": 1991,
+    "description": "El erizo azul más rápido del mundo corre a través de niveles llenos de velocidad, bucles y anillos dorados mientras lucha contra el malvado Dr. Robotnik para salvar a los animales del mundo.",
+    "image": "https://cloudfront-us-east-1.images.arcpublishing.com/elespectador/DDANOFZLO5CBJMNIUOT4HY6CRE.jpg",
+    "compania": "Sega",
+    "id": "10"
+  },
+  {
+    "name": "Mortal Kombat",
+    "genre": "Lucha",
+    "Fechadecreaccion": 1992,
+    "description": "El legendario juego de lucha conocido por su violencia gráfica y los famosos Fatality moves. Luchadores con habilidades únicas se enfrentan en combates sangrientos que definieron el género.",
+    "image": "https://media.es.wired.com/photos/64664f32a566376ee967bc31/16:9/w_1280,c_limit/MortalKombat1.jpg?mbid=social_retweet",
+    "compania": "Midway Games",
+    "id": "11"
+  },
+  {
+    "name": "Grand Theft Auto: San Andreas",
+    "genre": "Acción-Aventura",
+    "Fechadecreaccion": 2004,
+    "description": "Carl 'CJ' Johnson regresa a Los Santos y se ve envuelto en una épica historia de pandillas y crimen en el estado ficticio de San Andreas, un vasto mundo abierto lleno de misiones y actividades.",
+    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1547000/capsule_616x353.jpg?t=1741117455",
+    "compania": "Rockstar Games",
+    "id": "12"
+  },
+  {
+    "name": "The Sims 4",
+    "genre": "Simulación",
+    "Fechadecreaccion": 2014,
+    "description": "El simulador de vida definitivo donde creas y controlas personajes virtuales llamados Sims. Construye sus hogares, desarrolla sus carreras y vive sus vidas en este juego que revolucionó la simulación social.",
+    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1222670/capsule_616x353.jpg?t=1763056950",
+    "compania": "Maxis",
+    "id": "13"
+  },
+  {
+    "name": "Among Us",
+    "genre": "Social-Deducción",
+    "Fechadecreaccion": 2018,
+    "description": "Juego de deducción social donde tripulantes completan tareas en una nave espacial mientras impostores sabotean y eliminan jugadores. ¿Puedes descubrir quién es el impostor antes de que sea demasiado tarde?",
+    "image": "https://cdn.aptoide.com/imgs/d/4/6/d460a63e167a534bc7b9e4f1eaeed7dc_fgraphic.png",
+    "compania": "InnerSloth",
+    "id": "14"
+  },
+  {
+    "name": "Roblox",
+    "genre": "Plataforma de Creación",
+    "Fechadecreaccion": 2006,
+    "description": "Plataforma que permite a los usuarios crear y jugar millones de experiencias generadas por la comunidad. Desde juegos de rol hasta obstáculos, Roblox ofrece un universo infinito de diversión.",
+    "image": "https://images.rbxcdn.com/28ab48fcd5d5b19b03c126d2b6aef4b8.jpg",
+    "compania": "Roblox Corporation",
+    "id": "15"
+  },
+  {
+    "name": "Genshin Impact",
+    "genre": "RPG de Acción",
+    "Fechadecreaccion": 2020,
+    "description": "RPG de acción de mundo abierto con elementos gacha. Explora el vasto mundo de Teyvat, desbloquea personajes únicos con diferentes elementos y descubre una historia épica llena de misterios.",
+    "image": "https://gaming-cdn.com/images/products/9471/orig/genshin-impact-pc-epic-games-cover.jpg?v=1754495553",
+    "compania": "miHoYo",
+    "id": "16"
+  },
+  {
+    "name": "Castlevania",
+    "genre": "Acción-Aventura",
+    "Fechadecreaccion": 1986,
+    "description": "Clásico juego de acción y plataformas donde los miembros del clan Belmont luchan contra el Conde Drácula y sus hordas de monstruos en el castillo de Castlevania.",
+    "image": "https://assets.nintendo.com/image/upload/c_fill,w_1200/q_auto:best/f_auto/dpr_2.0/store/software/switch/70010000017486/ce2588bffd4be4a6f375a6e2954dc7de7b8ee45281d8f6fcf79d7f391221f793",
+    "compania": "Konami",
+    "id": "17"
+  },
+  {
+    "name": "Plants vs Zombies",
+    "genre": "Estrategia",
+    "Fechadecreaccion": 2009,
+    "description": "Divertido juego de estrategia por turnos donde plantas diferentes tipos de plantas con habilidades únicas para defender tu casa de hordas de zombies humorísticos.",
+    "image": "https://nintenduo.com/wp-content/uploads/2025/03/Plants-vs-Zombies.webp",
+    "compania": "PopCap Games",
+    "id": "18"
+  },
+  {
+    "name": "Clash Royale",
+    "genre": "Estrategia",
+    "Fechadecreaccion": 2016,
+    "description": "Juego de estrategia en tiempo real que combina elementos de cartas coleccionables y tower defense. Forma tu mazo y destruye las torres de tu oponente en intensos combates de 3 minutos.",
+    "image": "https://play-lh.googleusercontent.com/UOJ0N42bDu2lUbZIx4n9UCnHtnY5IEyG1jOLXByCbbCvi6wammxVR4XC9endWA5rAA=w526-h296-rw",
+    "compania": "Supercell",
+    "id": "19"
+  },
+  {
+    "name": "The Last of Us",
+    "genre": "Acción-Aventura",
+    "Fechadecreaccion": 2013,
+    "description": "Emotiva historia post-apocalíptica donde Joel debe escoltar a la joven Ellie a través de Estados Unidos en un mundo devastado por una infección zombie. Una narrativa profunda sobre supervivencia y relaciones humanas.",
+    "image": "https://clan.fastly.steamstatic.com/images/43315363/0fcdf6cd15da186334e78ad6302908afddb25566_400x225.jpg",
+    "compania": "Naughty Dog",
+    "id": "20"
+  },
+  {
+    "name": "Resident Evil 4 ",
+    "genre": "Survival Horror",
+    "Fechadecreaccion": 2005,
+    "description": "El agente Leon Kennedy viaja a una zona rural de España para rescatar a la hija del presidente, secuestrada por una secta oscura. Enfrenta a habitantes infectados por un parásito usando un sistema de combate innovador con cámara sobre el hombro. Supervivencia, acción intensa y puzzles en un horror que redefine la saga.",
+    "image": "https://cloudfront-us-east-1.images.arcpublishing.com/elespectador/PS3SBRRNONGYLKCUET2S4YPERM.jpg",
+    "compania": "Capcom",
+    "id": "21"
+  },
+  {
+    "name": "Hollow Knight",
+    "genre": "Metroidvania",
+    "Fechadecreaccion": 2017,
+    "description": "Hermoso juego de acción y aventura en 2D con estilo artístico hand-drawn. Explora las cavernas de Hallownest, descubre secretos ancestrales y enfréntate a jefes desafiantes en este indie aclamado.",
+    "image": "https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1240/b_white/f_auto/q_auto/store/software/switch/70010000003208/4643fb058642335c523910f3a7910575f56372f612f7c0c9a497aaae978d3e51",
+    "compania": "Team Cherry",
+    "id": "22"
+  },
+  {
+    "name": "Spyro Reignited Trilogy",
+    "genre": "Plataformas",
+    "Fechadecreaccion": 2018,
+    "description": "Remasterización de los tres primeros juegos de Spyro el dragón. Corre, vuela y escupe fuego a través de coloridos mundos mientras rescatas a tus amigos dragones de los malvados gnorcs.",
+    "image": "https://image.api.playstation.com/cdn/UP0002/CUSA12125_00/wQimEr4XlJnBh9zJL6h8vwIoB919zvRy.png",
+    "compania": "Activision",
+    "id": "23"
+  },
+  {
+    "name": "Counter-Strike: Global Offensive",
+    "genre": "Shooter en Primera Persona",
+    "Fechadecreaccion": 2012,
+    "description": "El shooter táctico competitivo por excelencia. Dos equipos, Terroristas y Antiterroristas, se enfrentan en rondas donde la estrategia, la puntería y el trabajo en equipo son esenciales para la victoria.",
+    "image": "https://media.steampowered.com/apps/csgo/blog/images/fb_image.png?v=6",
+    "compania": "Valve",
+    "id": "24"
+  },
+  {
+    "name": "God of War",
+    "genre": "Acción-Aventura",
+    "Fechadecreaccion": 2018,
+    "description": "Kratos, ahora en el mundo nórdico, debe guiar a su hijo Atreus en un viaje emocional mientras se enfrenta a dioses y criaturas mitológicas en esta reinvención aclamada de la saga.",
+    "image": "https://irrompibles.net/irrwp/wp-content/uploads/2013/02/images_micos_nicobarbap_Notas_gow.gif",
+    "compania": "Santa Monica Studio",
+    "id": "25"
+  },
+  {
+    "name": "Overwatch 2",
+    "genre": "Shooter en Primera Persona",
+    "Fechadecreaccion": 2022,
+    "description": "Shooter de equipo con héroes únicos y habilidades especiales. Combina la puntería de los FPS con habilidades de MOBA en partidas rápidas y dinámicas 6vs6.",
+    "image": "https://www.nintendo.com/eu/media/images/10_share_images/games_15/nintendo_switch_download_software_1/2x1_NSwitchDS_Overwatch2_Season6_image1600w.png",
+    "compania": "Blizzard Entertainment",
+    "id": "26"
+  },
+  {
+    "name": "Dark Souls",
+    "genre": "RPG de Acción",
+    "Fechadecreaccion": 2011,
+    "description": "El juego que popularizó el género 'souls-like'. Un RPG de acción desafiante con combate meticuloso, mundo interconectado y una narrativa ambiental profunda que recompensa la exploración.",
+    "image": "https://assets.nintendo.com/image/upload/q_auto/f_auto/store/software/switch/70010000008122/453d17f26995df6bd67d698c90ba2fd27157a61875e1a9730545da23474c6aaf",
+    "compania": "FromSoftware",
+    "id": "27"
+  },
+  {
+    "name": "Red Dead Redemption 2",
+    "genre": "Acción-Aventura",
+    "Fechadecreaccion": 2018,
+    "description": "Epica historia del forajido Arthur Morgan y la banda de Van der Linde en el ocaso del Viejo Oeste. Un mundo abierto increíblemente detallado con una narrativa profunda sobre lealtad y redención.",
+    "image": "https://media-rockstargames-com.akamaized.net/mfe6/prod/__common/img/949e0a50124a889b098f73cedc29fb3b.jpg",
+    "compania": "Rockstar Games",
+    "id": "28"
+  },
+  {
+    "name": "Elden Ring",
+    "genre": "RPG de Acción",
+    "Fechadecreaccion": 2022,
+    "description": "Colaboración entre Hidetaka Miyazaki y George R.R. Martin. Un RPG de mundo abierto masivo que combina la jugabilidad desafiante de Souls con la exploración libre en las Tierras Intermedias.",
+    "image": "https://www.nintendo.com/eu/media/images/assets/nintendo_switch_2_games/eldenringtarnishededition/2x1_NSwitch2_EldenRing.jpg",
+    "compania": "FromSoftware",
+    "id": "29"
+  },
+  {
+    "name": "Super Smash Bros. Ultimate",
+    "genre": "Lucha",
+    "Fechadecreaccion": 2018,
+    "description": "El crossover de lucha definitivo con más de 80 personajes de diversas franquicias de videojuegos. Combates caóticos y llenos de fanservice para hasta 8 jugadores.",
+    "image": "https://assets.nintendo.com/image/upload/q_auto/f_auto/store/software/switch/70010000012332/ac4d1fc9824876ce756406f0525d50c57ded4b2a666f6dfe40a6ac5c3563fad9",
+    "compania": "Nintendo",
+    "id": "30"
+  },
+  {
+    "name": "Animal Crossing: New Horizons",
+    "genre": "Simulación",
+    "Fechadecreaccion": 2020,
+    "description": "Vive una vida tranquila en una isla desierta que puedes personalizar completamente. Pesca, atrapa insectos, decora tu hogar y hazte amigo de adorables vecinos animales.",
+    "image": "https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1240/b_white/f_auto/q_auto/store/software/switch/70010000027619/9989957eae3a6b545194c42fec2071675c34aadacd65e6b33fdfe7b3b6a86c3a",
+    "compania": "Nintendo",
+    "id": "31"
+  },
+  {
+    "name": "Yandere Simulator",
+    "genre": "Simulación-Stealth",
+    "Fechadecreaccion": 2015,
+    "description": "Juego de simulación y stealth donde controlas a Yandere-chan, una estudiante de preparatoria que eliminará a cualquier rival romántico para ganar el amor de su senpai usando métodos creativos y sigilosos.",
+    "image": "https://i.ytimg.com/vi/O6KPchOI4wQ/maxresdefault.jpg",
+    "compania": "Yandere Dev",
+    "id": "32"
+  },
+  {
+    "name": "Geometry Dash",
+    "genre": "Música-Plataformas",
+    "Fechadecreaccion": 2013,
+    "description": "Adictivo juego de ritmo y plataformas donde saltas y esquivas obstáculos al compás de música electrónica. Niveles desafiantes y editor de niveles para crear tus propios diseños.",
+    "image": "https://geometry-game.io/data/image/game/geometry-dash/dashmetry.png",
+    "compania": "RobTop Games",
+    "id": "33"
+  },
+  {
+    "name": "Gacha Life 2",
+    "genre": "Creación de Personajes",
+    "Fechadecreaccion": 2021,
+    "description": "Secuela del popular juego de creación de personajes anime. Crea y personaliza tus propios personajes, escenas y historias con miles de opciones de vestuario, accesorios y fondos.",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZuWhszGz8CFWMeN5cmEJI3jxJ8Tymmkgknw&s",
+    "compania": "Lunime",
+    "id": "34"
+  },
+  {
+    "name": "Subway Surfers",
+    "genre": "Carrera Infinita",
+    "Fechadecreaccion": 2012,
+    "description": "Uno de los juegos móviles más descargados del mundo. Corre por las vías del tren esquivando obstáculos y recogiendo monedas mientras un guardia y su perro te persiguen sin descanso.",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTATS2fl9mCDplF7l-__BWMP9w8TggzhZMolA&s",
+    "compania": "SYBO Games",
+    "id": "35"
+  },
+  {
+    "name": "Little Nightmares",
+    "genre": "Horror-Plataformas",
+    "Fechadecreaccion": 2017,
+    "description": "Inquietante juego de horror y plataformas donde controlas a Six, una niña atrapada en un mundo de pesadilla llamado 'La Fauces'. Resuelve puzzles y escapa de criaturas grotescas en este thriller atmosférico.",
+    "image": "https://p325k7wa.twic.pics/high/little-nightmares/little-nightmares/07-retailers/ln1-enhanced-edition.png?twic=v1/resize=760/step=10/quality=80",
+    "compania": "Tarsier Studios",
+    "id": "36"
+  },
+  {
+    "name": "FIFA 23",
+    "genre": "Deportes",
+    "Fechadecreaccion": 2022,
+    "description": "La última entrega de la legendaria saga de fútbol. Jugabilidad realista con todos los equipos, ligas y estadios oficiales. Modos Carrera, Ultimate Team y Volta Football para la experiencia futbolística definitiva.",
+    "image": "https://sm.ign.com/ign_es/screenshot/default/kylian-mbappe-gen5-km-crop-social-1920x1080_8s7e.jpg",
+    "compania": "EA Sports",
+    "id": "37"
+  },
+  {
+    "name": "Candy Crush Saga",
+    "genre": "Puzzle",
+    "Fechadecreaccion": 2012,
+    "description": "El fenómeno de los juegos de puzzle móviles. Combina caramelos del mismo color para completar niveles llenos de desafíos. Con miles de niveles y power-ups, es uno de los juegos más adictivos jamás creados.",
+    "image": "https://www.trecebits.com/wp-content/uploads/2025/08/candycrushsaga.jpg",
+    "compania": "King",
+    "id": "38"
+  }
+]

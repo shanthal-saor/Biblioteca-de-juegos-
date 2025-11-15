@@ -73,6 +73,7 @@ window.addEventListener('load', () => {
 });
 
 document.addEventListener('DOMContentLoaded', cargarReseñas);
+document.addEventListener('DOMContentLoaded', initGameSuggestions);
 
 // FORMULARIO DE RESEÑAS
 form.addEventListener('submit', async (e) => {
@@ -146,6 +147,65 @@ async function cargarReseñas() {
     const reseñas = JSON.parse(localStorage.getItem('reseñas')) || [];
     reseñas.forEach(mostrarReseña);
   }
+}
+
+let juegosCache = []
+async function fetchJuegosCatalogo() {
+  try {
+    const resp = await fetch('/api/juegos')
+    if (!resp.ok) throw new Error('Error al obtener juegos')
+    const data = await resp.json()
+    return Array.isArray(data) ? data : []
+  } catch (e) {
+    return []
+  }
+}
+
+function ensureGameSuggestionBox(input) {
+  let wrapper = input.parentElement
+  if (!wrapper.classList.contains('game-input-wrapper')) {
+    const newWrapper = document.createElement('div')
+    newWrapper.className = 'game-input-wrapper'
+    wrapper.insertBefore(newWrapper, input)
+    newWrapper.appendChild(input)
+    wrapper = newWrapper
+  }
+  let box = wrapper.querySelector('.game-suggestions')
+  if (!box) {
+    box = document.createElement('div')
+    box.className = 'game-suggestions'
+    wrapper.appendChild(box)
+  }
+  return box
+}
+
+function renderGameSuggestions(input, q) {
+  const box = ensureGameSuggestionBox(input)
+  const query = q.trim().toLowerCase()
+  if (!query) { box.innerHTML = ''; box.style.display = 'none'; return }
+  const matches = juegosCache.filter(g => {
+    const name = (g.titulo || g.name || '').toLowerCase()
+    return name.startsWith(query)
+  }).slice(0, 6)
+  box.innerHTML = matches.map(m => `<div class="game-suggestion-item">${m.titulo || m.name}</div>`).join('')
+  box.style.display = matches.length ? 'block' : 'none'
+  box.querySelectorAll('.game-suggestion-item').forEach(el => {
+    el.addEventListener('click', () => {
+      input.value = el.textContent
+      box.style.display = 'none'
+    })
+  })
+}
+
+async function initGameSuggestions() {
+  juegosCache = await fetchJuegosCatalogo()
+  const input = document.getElementById('tituloJuego')
+  if (!input) return
+  input.addEventListener('input', () => renderGameSuggestions(input, input.value))
+  input.addEventListener('blur', () => setTimeout(() => {
+    const box = input.parentElement.querySelector('.game-suggestions')
+    if (box) box.style.display = 'none'
+  }, 150))
 }
 
 function mostrarReseña(r) {

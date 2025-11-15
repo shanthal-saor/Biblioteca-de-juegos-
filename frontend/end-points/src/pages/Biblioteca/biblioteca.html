@@ -39,15 +39,70 @@
 
      <!-- === BOTÓN FLOTANTE PARA AGREGAR JUEGOS === -->
   <button id="addGameBtn" class="add-game-btn">+</button>
+  <div id="addChooser" class="add-chooser">
+    <button id="chooseCreate" class="chooser-btn">Crear juego</button>
+    <button id="chooseExisting" class="chooser-btn">Agregar existente</button>
+  </div>
 
   <!-- === MODAL PARA AGREGAR JUEGO === -->
   <div id="addGameModal" class="modal">
-    <div class="modal-content">
-      <h2>Agregar juego</h2>
-      <form id="addGameForm">
-        <input type="text" id="gameName" placeholder="Nombre del juego" required>
-        <button type="submit">Agregar</button>
+    <div class="modal-content arcade-modal">
+      <div class="modal-header">
+        <h2 id="modalTitle">Agregar Nuevo Juego</h2>
+        <button id="closeAddGameModal" class="close-x">✕</button>
+      </div>
+      <p class="modal-sub">Agrega información clave del juego. Los campos con * son obligatorios.</p>
+      <form id="gameForm" class="game-form">
+        <div class="form-grid">
+          <div class="col">
+            <label>Título *</label>
+            <input type="text" id="gameTitle" placeholder="Ej: Halo" required>
+          </div>
+          <div class="col">
+            <label>Imagen portada</label>
+            <div class="image-upload">
+              <label for="upload-cover" class="upload-label"> Subir imagen</label>
+              <input type="file" id="upload-cover" accept="image/*">
+              <img id="cover-preview" src="" alt="Vista previa" class="preview hidden">
+              <input type="hidden" id="gameCover" />
+            </div>
+          </div>
+          <div class="col">
+            <label>Género</label>
+            <input type="text" id="gameGenero" placeholder="Ej: Acción">
+          </div>
+          <div class="col">
+            <label>Plataformas</label>
+            <input type="text" id="gamePlataformas" placeholder="PC, PlayStation...">
+          </div>
+          <div class="col">
+            <label>Año</label>
+            <input type="text" id="gameFecha" placeholder="2023">
+          </div>
+          <div class="col">
+            <label>Desarrollador</label>
+            <input type="text" id="gameCompania" placeholder="Estudio">
+          </div>
+          <div class="col col-span">
+            <label>Descripción</label>
+            <textarea id="gameDescripcion" placeholder="Breve descripción" maxlength="800"></textarea>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="button" id="cancelGame" class="btn-secondary">Cancelar</button>
+          <button type="submit" id="submitGame" class="btn-primary">Crear</button>
+        </div>
       </form>
+      <div id="existingPicker" class="existing-picker hidden">
+        <div class="existing-search">
+          <input id="existingSearch" type="text" placeholder="Buscar por nombre..." />
+        </div>
+        <div id="existingGrid" class="existing-grid"></div>
+        <div class="form-actions">
+          <button type="button" id="cancelExisting" class="btn-secondary">Cancelar</button>
+          <button type="button" id="addExistingBtn" class="btn-primary">Agregar</button>
+        </div>
+      </div>
     </div>
   </div>
   
