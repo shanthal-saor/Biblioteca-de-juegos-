@@ -83,6 +83,28 @@
     </section>
   </main>
 
+  <div id="editReviewModal" class="modal">
+    <div class="modal-content">
+      <h3>Editar Reseña</h3>
+      <input type="text" id="editTituloJuego" class="game-input" placeholder="Nombre del juego" />
+      <div class="rating-container">
+        <label class="rating-label">Calificación:</label>
+        <div class="star-rating" id="edit-star-rating">
+          <span class="edit-star" data-rating="1">★</span>
+          <span class="edit-star" data-rating="2">★</span>
+          <span class="edit-star" data-rating="3">★</span>
+          <span class="edit-star" data-rating="4">★</span>
+          <span class="edit-star" data-rating="5">★</span>
+        </div>
+      </div>
+      <textarea id="editTextoReseña" class="review-input" placeholder="Escribe tu reseña..."></textarea>
+      <div style="display:flex; gap:10px; justify-content:flex-end;">
+        <button id="cancelEdit" class="save-btn" style="background:#3c3d48;">Cancelar</button>
+        <button id="updateReview" class="save-btn">Actualizar Reseña</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Se eliminaron modales de autenticación -->
 <script>
   const uploadInput = document.getElementById('upload-img');

@@ -768,3 +768,57 @@ body {
 .game-suggestion-item { display:flex; align-items:center; gap:10px; padding:10px 12px; color:#e6e6f0; cursor:pointer; }
 .game-suggestion-item img { width:48px; height:48px; object-fit:cover; border-radius:8px; border:1px solid #2b2f3e; }
 .game-suggestion-item:hover { background:#232635; }
+
+/* //---decoraqcion de la tarjeta de reseñas---// */
+#editReviewModal .modal-content {
+  width: 520px;
+  background: #0a0a0f;
+  border: 4px solid #7c5cff;
+  border-radius: 14px;
+  box-shadow: 0 0 22px rgba(124,92,255,0.5), inset 0 0 10px rgba(124,92,255,0.25);
+  position: relative;
+}
+#editReviewModal .modal-content::before {
+  content: '';
+  position: absolute;
+  top: -22px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  height: 28px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #ff007a, #ffd600, #00e5ff);
+  box-shadow: 0 0 14px rgba(255,214,0,0.45);
+}
+#editReviewModal .modal-content::after {
+  content: '';
+  position: absolute;
+  bottom: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  height: 36px;
+  border-radius: 0 0 10px 10px;
+  background: #1a1b22;
+  border-top: 3px solid #333;
+  box-shadow: 0 0 10px rgba(255,214,0,0.35);
+}
+#editReviewModal h3 { color:#ffd600; text-shadow: 0 0 10px #7c5cff, 0 0 20px #ffd600; }
+#editReviewModal .game-input, #editReviewModal .review-input {
+  background: #1a1b22;
+  border: 1px solid #2b2f3e;
+  color: #fff;
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+#editReviewModal .review-input { min-height: 140px; }
+#edit-star-rating { display:flex; gap: 8px; font-size: 2rem; }
+#edit-star-rating .edit-star { color:#3c3d48; cursor:pointer; transition: all .2s ease; user-select: none; }
+#edit-star-rating .edit-star.hover, #edit-star-rating .edit-star.selected { color:#ffd700; text-shadow: 0 0 12px rgba(255,215,0,.6); transform: scale(1.05); }
+#updateReview { background:#9c7cff; }
+#cancelEdit { background:#3c3d48; }
+/* === Reseñas (CSS) ===
+   Función: estilos para formulario, lista y modal de edición de reseñas
+   Secciones: layout/base, cabecera/búsqueda, formulario, tarjetas publicadas,
+              sugerencias de juego, modal de edición (arcade)
+*/

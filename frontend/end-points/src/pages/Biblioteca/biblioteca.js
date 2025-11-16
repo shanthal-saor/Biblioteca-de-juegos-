@@ -6,6 +6,7 @@ let editingId = null
 let userLibrary = []
 
 function normalizeGame(g) {
+  // Normaliza objetos de juego provenientes del backend/catálogo
   return {
     id: g.id,
     titulo: g.titulo || g.name || 'Sin título',
@@ -19,6 +20,7 @@ function normalizeGame(g) {
 }
 
 async function fetchJuegos() {
+  // GET catálogo de juegos
   try {
     const res = await fetch(`${API_BASE}/api/juegos`)
     if (!res.ok) throw new Error('No se pudo cargar juegos')
@@ -28,6 +30,7 @@ async function fetchJuegos() {
 }
 
 function ensureSuggestionsContainer() {
+  // Crea o reutiliza el contenedor de sugerencias en la cabecera
   const header = document.querySelector('.header')
   if (!header) return null
   let box = header.querySelector('.search-suggestions')
@@ -36,6 +39,7 @@ function ensureSuggestionsContainer() {
 }
 
 function renderSearchSuggestions(q) {
+  // Renderiza coincidencias en el dropdown de búsqueda
   const box = ensureSuggestionsContainer(); if (!box) return
   if (!q) { box.innerHTML = ''; box.style.display = 'none'; return }
   const matches = allGames.filter(g => g.titulo.toLowerCase().startsWith(q)).slice(0,6)
@@ -51,12 +55,14 @@ function renderSearchSuggestions(q) {
 }
 
 function loadLibrary() {
+  // Carga biblioteca personal desde LocalStorage
   try { userLibrary = JSON.parse(localStorage.getItem('biblioteca_personal')) || [] } catch { userLibrary = [] }
 }
 
 function saveLibrary() { localStorage.setItem('biblioteca_personal', JSON.stringify(userLibrary)) }
 
 async function renderBiblioteca() {
+  // Pinta la grilla de juegos de la biblioteca (filtrada por búsqueda)
   if (!gamesSection) return
   if (!allGames.length) allGames = await fetchJuegos()
   if (!userLibrary.length) loadLibrary()
@@ -69,6 +75,7 @@ async function renderBiblioteca() {
 }
 
 function createCard(game) {
+  // Construye una tarjeta de juego con acciones según sea propio o agregado
   const card = document.createElement('div')
   card.className = 'game-card'
   const own = !!game.own
@@ -92,6 +99,7 @@ function createCard(game) {
 }
 
 function openModal(mode, game) {
+  // Abre modal de crear/editar juego, precargando datos si aplica
   const modal = document.getElementById('addGameModal')
   const title = document.getElementById('modalTitle')
   const submitBtn = document.getElementById('submitGame')
@@ -111,6 +119,7 @@ function openModal(mode, game) {
 function closeModal() { const modal = document.getElementById('addGameModal'); modal.style.display = 'none' }
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Inicialización: render y manejadores de subida de imagen
   renderBiblioteca()
   const input = document.getElementById('search')
   if (input) input.addEventListener('input', () => renderBiblioteca())
@@ -140,6 +149,7 @@ document.getElementById('chooseCreate')?.addEventListener('click', () => { choos
 document.getElementById('chooseExisting')?.addEventListener('click', () => { chooser.style.display = 'none'; openExistingModal() })
 
 document.getElementById('gameForm')?.addEventListener('submit', async (e) => {
+  // Crear o actualizar juego; añade el creado a la biblioteca vía GET por id
   e.preventDefault()
   const body = collectGameForm()
   const isEdit = !!editingId
@@ -176,6 +186,7 @@ document.getElementById('gameForm')?.addEventListener('submit', async (e) => {
 })
 
 function collectGameForm() {
+  // Extrae y estructura datos del formulario de juego
   const titulo = document.getElementById('gameTitle').value.trim()
   const cover = document.getElementById('gameCover').value.trim()
   const genero = document.getElementById('gameGenero').value.trim()
@@ -186,6 +197,7 @@ function collectGameForm() {
 }
 
 async function deleteGame(id) {
+  // DELETE juego; sincroniza catálogo y biblioteca personal
   if (!confirm('¿Eliminar este juego?')) return
   try {
     const resp = await fetch(`${API_BASE}/api/juegos/${id}`, { method: 'DELETE' })
@@ -198,12 +210,14 @@ async function deleteGame(id) {
 }
 
 function removeFromLibrary(id) {
+  // Quita un juego agregado de la biblioteca personal
   userLibrary = userLibrary.filter(g => g.id !== id)
   saveLibrary()
   renderBiblioteca()
 }
 
 function openExistingModal() {
+  // Abre el picker de juegos existentes con búsqueda y multiselección
   const modal = document.getElementById('addGameModal')
   const title = document.getElementById('modalTitle')
   title.textContent = 'Agregar juego existente'
@@ -220,6 +234,7 @@ function openExistingModal() {
 }
 
 function closeExistingModal() {
+  // Cierra el picker y restaura el formulario
   const modal = document.getElementById('addGameModal')
   document.getElementById('existingPicker').classList.add('hidden')
   document.getElementById('gameForm').classList.remove('hidden')
@@ -228,6 +243,7 @@ function closeExistingModal() {
 
 let selectedExistingIds = new Set()
 async function renderExistingGrid() {
+  // Renderiza la grilla scrollable de juegos existentes con selección
   if (!allGames.length) allGames = await fetchJuegos()
   const grid = document.getElementById('existingGrid')
   const q = document.getElementById('existingSearch').value.trim().toLowerCase()
@@ -253,6 +269,7 @@ async function renderExistingGrid() {
 }
 
 function addSelectedExisting() {
+  // Agrega los juegos seleccionados del picker a la biblioteca personal
   if (!selectedExistingIds.size) return
   const toAdd = allGames.filter(x => selectedExistingIds.has(x.id))
   toAdd.forEach(g => {
@@ -267,3 +284,6 @@ function addSelectedExisting() {
 }
 
 function buscar() { renderBiblioteca() }
+// === Biblioteca (JS)
+// Función: administrar la biblioteca personal del usuario y CRUD contra /api/juegos
+// Componentes: búsqueda, render de tarjetas, modal crear/editar, picker de existentes
