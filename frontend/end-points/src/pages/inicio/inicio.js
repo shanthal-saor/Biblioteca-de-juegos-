@@ -138,10 +138,22 @@ function showDetail(game, anchor) {
         <p><strong>Compañía:</strong> ${game.compania || 'N/D'}</p>
         ${game.plataformas.length ? `<p><strong>Plataformas:</strong> ${game.plataformas.join(', ')}</p>` : ''}
         <p class="descripcion">${game.descripcion || ''}</p>
+        <button class="reviews-btn">Ver reseñas</button>
+        <div class="reviews-panel"></div>
       </div>
     </div>
   `
   el.style.display = 'block'
+
+  const reviewsBtn = el.querySelector('.reviews-btn')
+  const reviewsPanel = el.querySelector('.reviews-panel')
+  if (reviewsBtn && reviewsPanel) {
+    reviewsBtn.addEventListener('click', async () => {
+      const items = await loadGameReviews(game.titulo)
+      reviewsPanel.innerHTML = items.map(renderReviewItem).join('') || '<div class="no-reviews">Sin reseñas</div>'
+      reviewsPanel.style.display = 'block'
+    })
+  }
 }
 
 document.addEventListener('click', (e) => {
@@ -156,6 +168,34 @@ document.addEventListener('click', (e) => {
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') hideDetail()
 })
+
+async function loadGameReviews(titulo) {
+  try {
+    const res = await fetch(`${API_BASE}/api/resenas`)
+    if (!res.ok) return []
+    const list = await res.json()
+    return list.filter(r => (r.titulo || '').toLowerCase() === (titulo || '').toLowerCase())
+  } catch (_) { return [] }
+}
+
+function renderReviewItem(r) {
+  const stars = '★'.repeat(r.calificacion || 0) + '☆'.repeat(5 - (r.calificacion || 0))
+  const when = formatRelative(r.createdAt, r.fecha, r.hora)
+  return `<div class="review-item"><div class="stars">${stars}</div><div class="opinion">${r.texto || ''}</div><div class="time">${when}</div></div>`
+}
+
+function formatRelative(createdAt, fecha, hora) {
+  const now = new Date()
+  if (createdAt) {
+    const dt = new Date(createdAt)
+    const diff = now.getTime() - dt.getTime()
+    const day = 24 * 60 * 60 * 1000
+    if (diff < day) return `hoy a ${hora || dt.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}`
+    if (diff < 2 * day) return 'ayer'
+    return dt.toLocaleDateString('es-ES')
+  }
+  return fecha || ''
+}
 
 async function renderJuegos() {
   const container = document.querySelector('.cards-container') || document.querySelector('.games-grid')

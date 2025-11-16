@@ -1,3 +1,5 @@
+
+
 .add-game-btn {
   position: fixed;
   bottom: 30px;
@@ -39,6 +41,9 @@
   text-align: center;
   box-shadow: 0 0 10px rgba(159, 122, 234, 0.3);
   transition: transform 0.3s;
+  display: flex;
+  flex-direction: column;
+  height: 260px;
 }
 
 .game-card:hover {
@@ -115,4 +120,8 @@
 .existing-grid .game-card.selected { border-color:#9c7cff; box-shadow:0 0 12px rgba(124,92,255,.35); }
 .existing-grid img { width:100%; height:120px; object-fit:cover; border-radius:8px; }
 .existing-grid .select-check { position:absolute; top:8px; right:8px; width:18px; height:18px; accent-color:#9c7cff; }
+
+.game-card img { width: 100%; height: 160px; object-fit: cover; border-radius: 10px; }
+.game-info { display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.game-info h3 { font-size: 1rem; margin: 6px 0; color: #fff; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
 

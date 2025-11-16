@@ -762,8 +762,9 @@ body {
 .review-list .likes .dislike-btn { font-size: 1.1rem; padding: 8px 12px; border-radius: 10px; }
 .review-list .like-count { font-size: 1rem; }
 
-.game-suggestions { position: absolute; background:#1a1b22; border:1px solid #2b2f3e; border-radius:10px; box-shadow:0 8px 20px rgba(0,0,0,0.35); width: 100%; max-width: 600px; display:none; overflow:hidden; z-index:100; }
+.game-suggestions { position: absolute; background:#1a1b22; border:1px solid #2b2f3e; border-radius:10px; box-shadow:0 8px 20px rgba(0,0,0,0.35); width: 280px; display:none; overflow-y:auto; max-height: 360px; z-index:100; }
 .game-input-wrapper { position: relative; }
 .game-suggestions { top: 48px; left: 0; }
-.game-suggestion-item { padding:10px 12px; color:#e6e6f0; cursor:pointer; }
+.game-suggestion-item { display:flex; align-items:center; gap:10px; padding:10px 12px; color:#e6e6f0; cursor:pointer; }
+.game-suggestion-item img { width:48px; height:48px; object-fit:cover; border-radius:8px; border:1px solid #2b2f3e; }
 .game-suggestion-item:hover { background:#232635; }

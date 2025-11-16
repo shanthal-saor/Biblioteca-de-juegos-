@@ -100,9 +100,7 @@ function openModal(mode, game) {
   submitBtn.textContent = mode === 'edit' ? 'Guardar' : 'Crear'
   document.getElementById('gameTitle').value = game?.titulo || ''
   document.getElementById('gameGenero').value = game?.genero || ''
-  document.getElementById('gamePlataformas').value = Array.isArray(game?.plataformas) ? game.plataformas.join(', ') : ''
   document.getElementById('gameFecha').value = game?.fecha || ''
-  document.getElementById('gameCompania').value = game?.compania || ''
   document.getElementById('gameDescripcion').value = game?.descripcion || ''
   document.getElementById('gameCover').value = game?.cover || ''
   const preview = document.getElementById('cover-preview')
@@ -152,10 +150,25 @@ document.getElementById('gameForm')?.addEventListener('submit', async (e) => {
     if (!resp.ok) throw new Error('Error al guardar juego')
     const saved = await resp.json()
     if (isEdit) {
-      const idx = allGames.findIndex(g => g.id === editingId)
-      if (idx !== -1) allGames[idx] = normalizeGame({ ...allGames[idx], ...saved })
+      const idxAll = allGames.findIndex(g => g.id === editingId)
+      if (idxAll !== -1) allGames[idxAll] = normalizeGame({ ...allGames[idxAll], ...saved })
+      const idxLib = userLibrary.findIndex(g => g.id === editingId)
+      if (idxLib !== -1) userLibrary[idxLib] = { ...normalizeGame(saved), own: true }
+      saveLibrary()
     } else {
-      allGames.push(normalizeGame(saved))
+      try {
+        const checkResp = await fetch(`${API_BASE}/api/juegos/${saved.id}`)
+        const got = checkResp.ok ? await checkResp.json() : saved
+        const normalized = normalizeGame(got)
+        allGames.push(normalized)
+        userLibrary.push({ ...normalized, own: true })
+        saveLibrary()
+      } catch {
+        const normalized = normalizeGame(saved)
+        allGames.push(normalized)
+        userLibrary.push({ ...normalized, own: true })
+        saveLibrary()
+      }
     }
     closeModal()
     renderBiblioteca()
@@ -166,13 +179,10 @@ function collectGameForm() {
   const titulo = document.getElementById('gameTitle').value.trim()
   const cover = document.getElementById('gameCover').value.trim()
   const genero = document.getElementById('gameGenero').value.trim()
-  const plataformasRaw = document.getElementById('gamePlataformas').value.trim()
   const fecha = document.getElementById('gameFecha').value.trim()
-  const compania = document.getElementById('gameCompania').value.trim()
   const descripcion = document.getElementById('gameDescripcion').value.trim()
-  const plataformas = plataformasRaw ? plataformasRaw.split(',').map(s => s.trim()).filter(Boolean) : []
   const generos = genero ? [genero] : []
-  return { titulo, cover, generos, plataformas, fecha, compania, descripcion }
+  return { titulo, cover, generos, fecha, descripcion }
 }
 
 async function deleteGame(id) {
@@ -181,6 +191,8 @@ async function deleteGame(id) {
     const resp = await fetch(`${API_BASE}/api/juegos/${id}`, { method: 'DELETE' })
     if (!resp.ok) throw new Error('Error al eliminar')
     allGames = allGames.filter(g => g.id !== id)
+    userLibrary = userLibrary.filter(g => g.id !== id)
+    saveLibrary()
     renderBiblioteca()
   } catch (e) { alert('No se pudo eliminar el juego') }
 }

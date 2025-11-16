@@ -1,3 +1,4 @@
+const API_BASE = 'http://localhost:3000'
 const form = document.getElementById('reviewForm');
 const lista = document.getElementById('listaReseñas');
 
@@ -74,6 +75,10 @@ window.addEventListener('load', () => {
 
 document.addEventListener('DOMContentLoaded', cargarReseñas);
 document.addEventListener('DOMContentLoaded', initGameSuggestions);
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
+  try { cargarReseñas() } catch {}
+  try { initGameSuggestions() } catch {}
+}
 
 // FORMULARIO DE RESEÑAS
 form.addEventListener('submit', async (e) => {
@@ -100,6 +105,8 @@ form.addEventListener('submit', async (e) => {
     texto, 
     level,
     fecha, 
+    hora: new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' }),
+    createdAt: Date.now(),
     calificacion: calificacionSeleccionada,
     likes: 0
   };
@@ -121,7 +128,7 @@ form.addEventListener('submit', async (e) => {
 
 async function guardarReseña(r) {
   try {
-    const resp = await fetch('/api/resenas', {
+    const resp = await fetch(`${API_BASE}/api/resenas`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(r)
@@ -139,7 +146,7 @@ async function guardarReseña(r) {
 
 async function cargarReseñas() {
   try {
-    const resp = await fetch('/api/resenas');
+    const resp = await fetch(`${API_BASE}/api/resenas`);
     if (!resp.ok) throw new Error('Error al obtener reseñas');
     const reseñas = await resp.json();
     reseñas.forEach(mostrarReseña);
@@ -152,7 +159,7 @@ async function cargarReseñas() {
 let juegosCache = []
 async function fetchJuegosCatalogo() {
   try {
-    const resp = await fetch('/api/juegos')
+    const resp = await fetch(`${API_BASE}/api/juegos`)
     if (!resp.ok) throw new Error('Error al obtener juegos')
     const data = await resp.json()
     return Array.isArray(data) ? data : []
@@ -183,15 +190,32 @@ function renderGameSuggestions(input, q) {
   const box = ensureGameSuggestionBox(input)
   const query = q.trim().toLowerCase()
   if (!query) { box.innerHTML = ''; box.style.display = 'none'; return }
-  const matches = juegosCache.filter(g => {
+  const candidates = juegosCache.filter(g => {
     const name = (g.titulo || g.name || '').toLowerCase()
-    return name.startsWith(query)
-  }).slice(0, 6)
-  box.innerHTML = matches.map(m => `<div class="game-suggestion-item">${m.titulo || m.name}</div>`).join('')
+    return name.startsWith(query) || name.includes(query)
+  })
+  const matches = candidates
+    .sort((a, b) => {
+      const na = (a.titulo || a.name || '').toLowerCase()
+      const nb = (b.titulo || b.name || '').toLowerCase()
+      const sa = na.startsWith(query) ? 0 : 1
+      const sb = nb.startsWith(query) ? 0 : 1
+      return sa - sb || na.localeCompare(nb)
+    })
+    .slice(0, 8)
+  box.innerHTML = matches.map(m => {
+    const title = m.titulo || m.name || ''
+    const img = m.cover || m.image || ''
+    return `<div class="game-suggestion-item">
+      <img src="${img}" alt="${title}" onerror="this.src='https://via.placeholder.com/48x48?text='" />
+      <span>${title}</span>
+    </div>`
+  }).join('')
   box.style.display = matches.length ? 'block' : 'none'
   box.querySelectorAll('.game-suggestion-item').forEach(el => {
     el.addEventListener('click', () => {
-      input.value = el.textContent
+      const title = el.querySelector('span').textContent
+      input.value = title
       box.style.display = 'none'
     })
   })
@@ -305,7 +329,7 @@ function mostrarReseña(r) {
 
 async function actualizarLikes(id, nuevosLikes) {
   try {
-    await fetch(`/api/resenas/${id}/likes`, {
+    await fetch(`${API_BASE}/api/resenas/${id}/likes`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ likes: nuevosLikes })
@@ -322,7 +346,7 @@ async function actualizarLikes(id, nuevosLikes) {
 
 async function editarReseña(id, cambios) {
   try {
-    const resp = await fetch(`/api/resenas/${id}`, {
+    const resp = await fetch(`${API_BASE}/api/resenas/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(cambios)
@@ -344,7 +368,7 @@ async function editarReseña(id, cambios) {
 
 async function eliminarReseña(id) {
   try {
-    const resp = await fetch(`/api/resenas/${id}`, {
+    const resp = await fetch(`${API_BASE}/api/resenas/${id}`, {
       method: 'DELETE'
     });
     if (!resp.ok) throw new Error('Error al eliminar reseña');
