@@ -1,3 +1,5 @@
+// === Servidor Backend
+// Función: configurar Express, CORS y montar el router principal
 const express = require('express');
 const app = express();
 app.use(express.json());
@@ -13,6 +15,7 @@ app.use((req, res, next) => {
 const router = require('./router/index.js')
 const PORT = process.env.PORT || 3000
 
+// Monta las rutas de API y estáticos
 app.use(router)
 
 app.listen(PORT, () => {

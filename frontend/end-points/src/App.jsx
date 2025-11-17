@@ -12,6 +12,8 @@ export default function HomePage() {
           <a href={FRONTEND_DIR + 'inicio/inicio.html'} className="hover:text-purple-300 transition">Inicio</a>
           <a href={FRONTEND_DIR + 'reseñas/reseñas.html'} className="hover:text-purple-300 transition">Reseñas</a>
           <a href={FRONTEND_DIR + 'Biblioteca/biblioteca.html'} className="hover:text-purple-300 transition">Biblioteca</a>
+          <a href={FRONTEND_DIR + 'login/login.html'} className="hover:text-purple-300 transition">Login</a>
+           <link rel="stylesheet" href="logo.png"></link>
         </nav>
       </header>
 

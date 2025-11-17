@@ -375,6 +375,7 @@ async function actualizarLikes(id, nuevosLikes) {
   }
 }
 
+
 // PUT edición de reseña (con fallback)
 async function editarReseña(id, cambios) {
   try {

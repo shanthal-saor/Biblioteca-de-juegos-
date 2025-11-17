@@ -1,3 +1,5 @@
+// === Router Backend
+// Función: exponer API para reseñas y juegos, y servir archivos estáticos
 const express = require('express')
 const path = require('path')
 const fs = require('fs')
@@ -49,11 +51,13 @@ function writeGames(list) {
   fs.writeFileSync(JUEGOS_FILE, JSON.stringify(list, null, 2), 'utf-8')
 }
 
+// Listar reseñas
 router.get('/api/resenas', (req, res) => {
   const reseñas = readReviews()
   res.json(reseñas)
 })
 
+// Crear reseña
 router.post('/api/resenas', (req, res) => {
   const body = req.body || {}
   const { usuario, titulo, imagen, texto, level, fecha, calificacion } = body
@@ -77,6 +81,7 @@ router.post('/api/resenas', (req, res) => {
   res.status(201).json(nueva)
 })
 
+// Obtener una reseña
 router.get('/api/resenas/:id', (req, res) => {
   const { id } = req.params
   const reseñas = readReviews()
@@ -85,6 +90,7 @@ router.get('/api/resenas/:id', (req, res) => {
   res.json(item)
 })
 
+// Actualizar likes
 router.put('/api/resenas/:id/likes', (req, res) => {
   const { id } = req.params
   const { likes } = req.body || {}
@@ -96,6 +102,8 @@ router.put('/api/resenas/:id/likes', (req, res) => {
   res.json({ id: reseñas[idx].id, likes: reseñas[idx].likes })
 })
 
+
+// Editar reseña
 router.put('/api/resenas/:id', (req, res) => {
   const { id } = req.params
   const { titulo, texto, imagen, calificacion, level } = req.body || {}
