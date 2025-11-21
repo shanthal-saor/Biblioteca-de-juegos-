@@ -6,7 +6,9 @@ export default function HomePage() {
   return (
     <div className="min-h-screen text-white relative overflow-hidden flex flex-col arcade-bg">
       <header className="w-full flex justify-between items-center px-10 py-6">
+
         <h1 className="text-3xl font-extrabold tracking-tight">NeonPlaybook</h1>
+        
         <nav className="flex gap-8 text-lg font-medium">
           <a href={'/'} className="active hover:text-purple-300 transition">Hogar</a>
           <a href={FRONTEND_DIR + 'inicio/inicio.html'} className="hover:text-purple-300 transition">Inicio</a>
