@@ -415,6 +415,3 @@ async function eliminarReseña(id) {
     return true;
   }
 }
-
-// === LOGIN Y REGISTRO ===
-// Ahora la autenticación se gestiona en pages/shared/auth.js.
