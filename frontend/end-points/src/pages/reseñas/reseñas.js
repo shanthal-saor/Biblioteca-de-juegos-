@@ -1,13 +1,10 @@
-// === Reseñas (JS)
-// Función: crear, listar y editar reseñas; sugerencias de juegos
-// Componentes: formulario con estrellas, lista de reseñas, modal edición, sugerencias de juego
 const API_BASE = 'http://localhost:3000'
 const form = document.getElementById('reviewForm');
-const lista = document.getElementById('listaReseñas');
+const lista = document.getElementById('listaReseñas'); 
 
 // SISTEMA DE CALIFICACIÓN CON ESTRELLAS
-let calificacionSeleccionada = 0;
-const starRating = document.getElementById('star-rating');
+let calificacionSeleccionada = 0; 
+const starRating = document.getElementById('star-rating');// Elemento contenedor de estrellas
 const ratingText = document.getElementById('rating-text');
 const stars = starRating ? starRating.querySelectorAll('.star') : [];
 

@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Reseñas - NeonPlaybook</title>
   <link rel="stylesheet" href="../shared/global.css">
-  <!-- Eliminado style.css inexistente y mantenido reseñas.css -->
   <link rel="stylesheet" href="reseñas.css">
 </head>
 <body>
+
   <!-- === SIDEBAR === -->
   <aside class="sidebar">
     <h2>NeonPlaybook</h2>
@@ -32,16 +32,16 @@
       <h1>Reseñas de los jugadores</h1>
       <H2> Que te parece el juego? OPINA!!</H2>
 
-      <!-- Unificación de estructura: formulario con ids esperados por reseñas.js -->
+
       <section id="reseñas" class="reviews-section">
         <div class="review-card">
+
           <!-- Formulario de reseñas -->
           <form id="reviewForm" class="review-form">
             <div class="image-upload">
               <label for="upload-img" class="upload-label"> Subir imagen</label>
               <input type="file" id="upload-img" accept="image/*">
               <img id="preview-img" src="" alt="Vista previa" class="preview hidden">
-              <!-- Campo oculto para almacenar el DataURL de la imagen y ser usado por reseñas.js -->
               <input type="hidden" id="imagenJuego" />
             </div>
 
@@ -128,7 +128,6 @@
   });
 </script>
 
-<!-- Lógica principal de la página -->
 <script src="reseñas.js"></script>
 
 </body>

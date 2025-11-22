@@ -1,1 +1,79 @@
-[]
+[
+  {
+    "id": 1763764642740,
+    "usuario": "Jose rodrigues",
+    "titulo": "Roblox",
+    "imagen": "img/placeholder.jpg",
+    "texto": "Perfecto para jugar con amigos y con pareja, es facil y dinamico, hay muchos juegos me encanta!!",
+    "level": "facil",
+    "fecha": "21 de noviembre de 2025",
+    "calificacion": 5,
+    "likes": 1
+  },
+  {
+    "id": 1763764699185,
+    "usuario": "shanthal",
+    "titulo": "The Legend of Zelda: Breath of the Wild",
+    "imagen": "img/placeholder.jpg",
+    "texto": "mis amigos me lo recomendaron, full graficos",
+    "level": "intermedio",
+    "fecha": "21 de noviembre de 2025",
+    "calificacion": 5,
+    "likes": 1
+  },
+  {
+    "id": 1763764745830,
+    "usuario": "shanthal",
+    "titulo": "Genshin Impact",
+    "imagen": "img/placeholder.jpg",
+    "texto": "Me quede sin protogemas para mi mavuika NOOO, ademas es una copia de zelda",
+    "level": "intermedio",
+    "fecha": "21 de noviembre de 2025",
+    "calificacion": 4,
+    "likes": 1
+  },
+  {
+    "id": 1763764822190,
+    "usuario": "shantylli-192",
+    "titulo": "Gacha Life 2",
+    "imagen": "img/placeholder.jpg",
+    "texto": "me encanta que ahora tenemos mas poses y cabellos, ahora puedo seguir haciendo mi historia en youtube",
+    "level": "facil",
+    "fecha": "21 de noviembre de 2025",
+    "calificacion": 5,
+    "likes": 1
+  },
+  {
+    "id": 1763764864413,
+    "usuario": "lina",
+    "titulo": "Clash Royale",
+    "imagen": "img/placeholder.jpg",
+    "texto": "mi novio ya no me presta atencion por estar con ese juego UISHH",
+    "level": "facil",
+    "fecha": "21 de noviembre de 2025",
+    "calificacion": 1,
+    "likes": 1
+  },
+  {
+    "id": 1763764929116,
+    "usuario": "Doña maria",
+    "titulo": "Roblox",
+    "imagen": "img/placeholder.jpg",
+    "texto": "este juego es un peligro para los niños, muchos de ellos hablan con gente que no conocen y no sabemos si son niños o secuestradores",
+    "level": "facil",
+    "fecha": "21 de noviembre de 2025",
+    "calificacion": 1,
+    "likes": 0
+  },
+  {
+    "id": 1763764980394,
+    "usuario": "Artux",
+    "titulo": "Yandere Simulator",
+    "imagen": "img/placeholder.jpg",
+    "texto": "DIOS YANDERE ES UNA JOLLITA, NECESITO QUE BUDO SEA EL SEMPAI",
+    "level": "intermedio",
+    "fecha": "21 de noviembre de 2025",
+    "calificacion": 5,
+    "likes": 0
+  }
+]

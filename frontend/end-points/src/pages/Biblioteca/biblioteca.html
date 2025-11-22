@@ -6,14 +6,10 @@
   <title>Biblioteca - NeonPlaybook</title>
   <link rel="stylesheet" href="../shared/global.css">
   <link rel="stylesheet" href="biblioteca.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   <link rel="stylesheet" href="logo.png">
-
-  
 </head>
+
 <body>
-  <!-- === SIDEBAR === -->
+  <!-- === BARRA LATERAL === -->
   <aside class="sidebar">
     <h2>NeonPlaybook</h2>
     <nav>
@@ -24,78 +20,89 @@
     </nav>
   
 </aside>
-  <!-- === CONTENIDO PRINCIPAL === -->
+
+  <!-- === BARRA DE BÚSQUEDA === -->
   <main class="content">
-    <header class="header">
-      <input type="text" id="search" placeholder="Buscar juegos en tu biblioteca...">
+    <header class="header"> 
+      <input type="text" id="search" placeholder="Buscar juegos en tu biblioteca..."> 
       <button onclick="buscar()">Buscar</button>
     </header>
 
     <section class="hero">
-      <h1>COLECCIONA TUS JUEGOS FAVORITOS</h1>
+      <h1>COLECCIONA Y CREA TUS JUEGOS FAVORITOS</h1>
       <p>Organiza y crea juegos en una sola lugar.</p>
     </section>
 
-    <section id="games" class="games-grid"></section>
+    <section id="games" class="games-grid"></section> <!-- === SECCION DONDE SE MOSTRARA LA BIBLIOTECA DE JUEGOS === -->
   </main>
  
 
      <!-- === BOTÓN FLOTANTE PARA AGREGAR JUEGOS === -->
-  <button id="addGameBtn" class="add-game-btn">+</button>
-  <div id="addChooser" class="add-chooser">
-    <button id="chooseCreate" class="chooser-btn">Crear juego</button>
-    <button id="chooseExisting" class="chooser-btn">Agregar existente</button>
+      <button id="addGameBtn" class="add-game-btn">+</button> 
+  <div id="addChooser" class="add-chooser"> <!-- === CONTENEDOR PARA LAS OPCIONES DE AGREGAR JUEGO === -->
+    <button id="chooseCreate" class="chooser-btn">Crear juego</button> <!-- === OPCION PARA CREAR UN JUEGO === -->
+    <button id="chooseExisting" class="chooser-btn">Agregar existente</button> <!-- === OPCION PARA AGREGAR UN JUEGO EXISTENTE === -->
   </div>
 
-  <!-- === MODAL PARA AGREGAR JUEGO === -->
-  <div id="addGameModal" class="modal">
-    <div class="modal-content arcade-modal">
-      <div class="modal-header">
+  <!-- === TARJETA PARA CREAR UN JUEGO === -->
+  <div id="addGameModal" class="modal"> 
+    <div class="modal-content arcade-modal"> <!-- === CONTENIDO DE LA TARJETA MODAL === --> 
+      <div class="modal-header"> 
         <h2 id="modalTitle">Agregar Nuevo Juego</h2>
-        <button id="closeAddGameModal" class="close-x">✕</button>
+        <button id="closeAddGameModal" class="close-x">✕</button> <!-- === BOTON PARA CERRAR LA TARJETA MODAL === -->
       </div>
-      <p class="modal-sub">Agrega información clave del juego. Los campos con * son obligatorios.</p>
-      <form id="gameForm" class="game-form">
-        <div class="form-grid">
-          <div class="col">
-            <label>Título *</label>
-            <input type="text" id="gameTitle" placeholder="Ej: Halo" required>
+      <p class="modal-sub">Agrega información clave del juego. Los campos con <strong>son obligatorios</strong>.</p> 
+
+      <!-- === FORMULARIO PARA CREAR UN JUEGO === -->
+      <form id="gameForm" class="game-form"> 
+        <div class="form-grid"> <!-- === GRID PARA ORGANIZAR LOS CAMPOS DEL FORMULARIO === -->
+          <div class="col"> <!-- === COLUMNA PARA EL CAMPO DE TITULO === -->
+            <label>Título *</label> <!-- === ETiqueta PARA EL CAMPO DE TITULO === --> 
+            <input type="text" id="gameTitle" placeholder="Ej: Roblox" required> 
           </div>
-          <div class="col">
-            <label>Imagen portada</label>
-            <div class="image-upload">
-              <label for="upload-cover" class="upload-label"> Subir imagen</label>
-              <input type="file" id="upload-cover" accept="image/*">
-              <img id="cover-preview" src="" alt="Vista previa" class="preview hidden">
-              <input type="hidden" id="gameCover" />
+
+          <div class="col"> <!-- === COLUMNA PARA EL CAMPO DE IMAGEN PORTADA === -->
+            <label>Imagen portada</label> <!-- === ETiqueta PARA EL CAMPO DE IMAGEN PORTADA === -->     
+            <div class="image-upload"> <!-- === CONTENEDOR PARA SUBIR LA IMAGEN PORTADA === -->
+              <label for="upload-cover" class="upload-label"> Subir imagen</label> <!-- === ETiqueta PARA SUBIR LA IMAGEN PORTADA === -->
+              <input type="file" id="upload-cover" accept="image/*"> <!-- === CAMPO PARA SUBIR LA IMAGEN PORTADA === -->
+              <img id="cover-preview" src="" alt="Vista previa" class="preview hidden"> <!-- === IMAGEN PREVIA DE LA PORTADA === -->
+              <input type="hidden" id="gameCover" /> <!-- === CAMPO OCULTO PARA ALMACENAR LA IMAGEN PORTADA === --> 
             </div>
           </div>
+          
           <div class="col">
-            <label>Género</label>
-            <input type="text" id="gameGenero" placeholder="Ej: Acción">
+            <label>Género *</label>
+            <input type="text" id="gameGenero" placeholder="Ej: Acción, Aventura" required>
           </div>
+
           <div class="col">
-            <label>Año</label>
-            <input type="text" id="gameFecha" placeholder="2023">
+            <label>Año *</label>
+            <input type="text" id="gameFecha" placeholder="2008" required>
           </div>
+
           <div class="col col-span">
             <label>Descripción</label>
             <textarea id="gameDescripcion" placeholder="Breve descripción" maxlength="800"></textarea>
           </div>
+
         </div>
-        <div class="form-actions">
-          <button type="button" id="cancelGame" class="btn-secondary">Cancelar</button>
-          <button type="submit" id="submitGame" class="btn-primary">Crear</button>
+        <div class="form-actions"> <!-- === CONTENEDOR PARA LOS BOTONES DE ACCION DEL FORMULARIO === -->
+          <button type="button" id="cancelGame" class="btn-secondary">Cancelar</button> <!-- === BOTON PARA CANCELAR LA ACCION === -->
+          <button type="submit" id="submitGame" class="btn-primary">Crear</button> <!-- === BOTON PARA CREAR EL JUEGO === -->
         </div>
       </form>
-      <div id="existingPicker" class="existing-picker hidden">
-        <div class="existing-search">
-          <input id="existingSearch" type="text" placeholder="Buscar por nombre..." />
+
+        <!-- === TARJETA PARA AGREGAR JUEGOS EXISTENTES === -->
+      <div id="existingPicker" class="existing-picker hidden"> <!-- === TARJETA MODAL PARA AGREGAR JUEGOS EXISTENTES === -->
+        <div class="existing-search"> <!-- === CONTENEDOR PARA EL CAMPO DE BUSQUEDA DE JUEGOS EXISTENTES === -->
+          <input id="existingSearch" type="text" placeholder="Buscar por nombre..." /> <!-- === CAMPO DE BUSQUEDA DE JUEGOS EXISTENTES === -->
         </div>
-        <div id="existingGrid" class="existing-grid"></div>
-        <div class="form-actions">
-          <button type="button" id="cancelExisting" class="btn-secondary">Cancelar</button>
-          <button type="button" id="addExistingBtn" class="btn-primary">Agregar</button>
+        
+        <div id="existingGrid" class="existing-grid"></div> // grid para mostrar los juegos existentes
+        <div class="form-actions"> <!-- === CONTENEDOR PARA LOS BOTONES DE ACCION DEL FORMULARIO === -->
+          <button type="button" id="cancelExisting" class="btn-secondary">Cancelar</button> <!-- === BOTON PARA CANCELAR LA ACCION === -->
+          <button type="button" id="addExistingBtn" class="btn-primary">Agregar</button> <!-- === BOTON PARA AGREGAR EL JUEGO EXISTENTE === -->
         </div>
       </div>
     </div>

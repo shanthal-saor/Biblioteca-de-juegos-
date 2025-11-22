@@ -39,23 +39,6 @@ body {
   margin-top: 20px;
 }
 
-.login-btn, .register-btn {
-  border: none; border-radius: 10px; padding: 10px 15px;
-  cursor: pointer; font-weight: bold; transition: 0.3s;
-}
-
-.login-btn {
-  background: linear-gradient(90deg, #5b4bff, #7c5cff);
-  color: #fff;
-}
-.login-btn:hover { transform: scale(1.05); }
-
-.register-btn {
-  background: linear-gradient(90deg, #3c3d48, #575a67);
-  color: #fff;
-}
-.register-btn:hover { background: linear-gradient(90deg,#5d5f6e,#7a7d8f); transform: scale(1.05); }
-
 /* === MODAL === */
 .modal {
   display: none;
