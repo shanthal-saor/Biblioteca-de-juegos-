@@ -1,4 +1,5 @@
-const API_BASE = 'http://localhost:3000' // 
+const API_BASE = 'http://localhost:3000'
+let allGames = []
 
 function normalizeGame(g) {
   // Normaliza estructura de juego para el front
@@ -27,33 +28,35 @@ async function fetchJuegos() {
   }
 }
 
-function createCard(game) { 
+function createCard(game) {
   // Crea tarjeta arcade y vincula el detalle
   const card = document.createElement('div')
   card.className = 'game-card arcade-card'
   card.setAttribute('data-id', game.id)
-  card.innerHTML = ` 
+
+  card.innerHTML = `
     <div class="card-preview">
       <img src="${game.cover}" alt="${game.titulo}" onerror="this.src='https://via.placeholder.com/280x160?text=No+Image'" />
       <h3 class="title">${game.titulo}</h3>
     </div>
   `
+
   const preview = card.querySelector('.card-preview')
   preview.addEventListener('click', () => {
-    showDetail(game, card) // muestra el detalle del juego cuando se hace click en la tarjeta
+    showDetail(game, card)
   })
 
-  return card // devuelve la tarjeta creada
+  return card
 }
 
-let detailOverlay 
-let overlayAnchor 
+let detailOverlay
+let overlayAnchor
 
-function ensureDetailOverlay() {
-  // Crea la tarjeta flotante  reutilizable para detalle de juego
+function ensureDetailOverlay() { 
+  // Crea popover reutilizable para detalle de juego
   if (!detailOverlay) {
-    detailOverlay = document.createElement('div') 
-    detailOverlay.className = 'detail-popover arcade-card' 
+    detailOverlay = document.createElement('div')
+    detailOverlay.className = 'detail-popover arcade-card'
     document.body.appendChild(detailOverlay)
     detailOverlay.style.display = 'none'
   }
@@ -62,8 +65,8 @@ function ensureDetailOverlay() {
 
 function hideDetail() {
   // Oculta y limpia el popover
-  const el = ensureDetailOverlay() 
-  el.style.display = 'none' 
+  const el = ensureDetailOverlay()
+  el.style.display = 'none'
   el.innerHTML = ''
   overlayAnchor = null
 }
@@ -94,12 +97,12 @@ function showDetail(game, anchor) {
       </div>
     </div>
   `
-    el.style.display = 'block' // muestra la tarjeta flotante con el detalle del juego
+  el.style.display = 'block'
 
-  const reviewsBtn = el.querySelector('.reviews-btn')
-  const reviewsPanel = el.querySelector('.reviews-panel')
+  const reviewsBtn = el.querySelector('.reviews-btn') 
+  const reviewsPanel = el.querySelector('.reviews-panel') 
   if (reviewsBtn && reviewsPanel) {
-    reviewsBtn.addEventListener('click', async () => {
+    reviewsBtn.addEventListener('click', async () => { 
       const items = await loadGameReviews(game.titulo)
       reviewsPanel.innerHTML = items.map(renderReviewItem).join('') || '<div class="no-reviews">Sin reseñas</div>'
       reviewsPanel.style.display = 'block'
@@ -210,9 +213,4 @@ function renderSearchSuggestions(q) {
 function buscar() {
   renderJuegos()
 }
-
-// === Inicio (JS)
-// Función: mostrar catálogo con popover detalle y panel de reseñas
-// Componentes: auth local, tarjetas arcade, popover detalle, sugerencias de búsqueda
-
 

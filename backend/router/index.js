@@ -1,10 +1,10 @@
 // === Router Backend
 // Función: exponer API para reseñas y juegos, y servir archivos estáticos
 const express = require('express')
-const path = require('path')
-const fs = require('fs')
+const path = require('path') 
+const fs = require('fs') 
 
-const router = express.Router()
+const router = express.Router() 
 
 const DATA_DIR = path.join(__dirname, '..', 'data')
 const DATA_FILE = path.join(DATA_DIR, 'resenas.json')
@@ -12,28 +12,28 @@ const JUEGOS_FILE = path.join(DATA_DIR, 'juegos.json')
 const FRONTEND_DIR = path.join(__dirname, '..', 'frontend', 'end-points')
 
 function ensureStorage() {
-  if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true })
+  if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true }) 
   if (!fs.existsSync(DATA_FILE)) fs.writeFileSync(DATA_FILE, '[]', 'utf-8')
   if (!fs.existsSync(JUEGOS_FILE)) fs.writeFileSync(JUEGOS_FILE, '[]', 'utf-8')
 }
 
-function readReviews() {
+function readReviews() {   
   ensureStorage()
   try {
-    const raw = fs.readFileSync(DATA_FILE, 'utf-8')
-    return JSON.parse(raw)
-  } catch (e) {
+    const raw = fs.readFileSync(DATA_FILE, 'utf-8') 
+    return JSON.parse(raw) 
+  } catch (e) { 
     fs.writeFileSync(DATA_FILE, '[]', 'utf-8')
     return []
   }
 }
 
-function writeReviews(list) {
-  ensureStorage()
-  fs.writeFileSync(DATA_FILE, JSON.stringify(list, null, 2), 'utf-8')
+function writeReviews(list) { 
+  ensureStorage() 
+  fs.writeFileSync(DATA_FILE, JSON.stringify(list, null, 2), 'utf-8') 
 }
 
-function readGames() {
+function readGames() {  // Leer juegos desde archivo JSON
   ensureStorage()
   try {
     const raw = fs.readFileSync(JUEGOS_FILE, 'utf-8')
@@ -46,7 +46,7 @@ function readGames() {
   }
 }
 
-function writeGames(list) {
+function writeGames(list) {  // Escribir juegos en archivo JSON
   ensureStorage()
   fs.writeFileSync(JUEGOS_FILE, JSON.stringify(list, null, 2), 'utf-8')
 }

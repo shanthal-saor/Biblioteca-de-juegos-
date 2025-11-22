@@ -2,8 +2,9 @@ import React from 'react'
 import './index.css'
 const FRONTEND_DIR = '/src/pages/';
 const port = 3000;
-export default function HomePage() {
-  return (
+export default function HomePage() {  // Componente HomePage, componente principal de la página de inicio
+
+  return ( 
     <div className="min-h-screen text-white relative overflow-hidden flex flex-col arcade-bg">
       <header className="w-full flex justify-between items-center px-10 py-6">
 

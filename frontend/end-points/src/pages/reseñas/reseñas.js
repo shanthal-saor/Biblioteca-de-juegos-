@@ -4,7 +4,7 @@ const lista = document.getElementById('listaReseñas');
 
 // SISTEMA DE CALIFICACIÓN CON ESTRELLAS
 let calificacionSeleccionada = 0; 
-const starRating = document.getElementById('star-rating');// Elemento contenedor de estrellas
+const starRating = document.getElementById('star-rating'); // Elemento contenedor de estrellas
 const ratingText = document.getElementById('rating-text');
 const stars = starRating ? starRating.querySelectorAll('.star') : [];
 

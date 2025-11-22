@@ -15,7 +15,6 @@ app.use((req, res, next) => {
 const router = require('./router/index.js')
 const PORT = process.env.PORT || 3000
 
-// Monta las rutas de API y estáticos
 app.use(router)
 
 app.listen(PORT, () => {
