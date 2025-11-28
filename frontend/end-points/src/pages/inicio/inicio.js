@@ -2,7 +2,7 @@ const API_BASE = 'http://localhost:3000'
 let allGames = []
 
 function normalizeGame(g) {
-  // Normaliza estructura de juego para el front
+  
   return {
     id: g.id,
     titulo: g.titulo || g.name || 'Sin título',
@@ -16,7 +16,7 @@ function normalizeGame(g) {
 }
 
 async function fetchJuegos() {
-  // GET juegos del backend
+  
   try {
     const res = await fetch(`${API_BASE}/api/juegos`)
     if (!res.ok) throw new Error('No se pudo cargar juegos')
@@ -29,7 +29,7 @@ async function fetchJuegos() {
 }
 
 function createCard(game) {
-  // Crea tarjeta arcade y vincula el detalle
+  
   const card = document.createElement('div')
   card.className = 'game-card arcade-card'
   card.setAttribute('data-id', game.id)
@@ -53,7 +53,7 @@ let detailOverlay
 let overlayAnchor
 
 function ensureDetailOverlay() { 
-  // Crea popover reutilizable para detalle de juego
+ 
   if (!detailOverlay) {
     detailOverlay = document.createElement('div')
     detailOverlay.className = 'detail-popover arcade-card'
@@ -64,7 +64,7 @@ function ensureDetailOverlay() {
 }
 
 function hideDetail() {
-  // Oculta y limpia el popover
+  
   const el = ensureDetailOverlay()
   el.style.display = 'none'
   el.innerHTML = ''
@@ -72,7 +72,7 @@ function hideDetail() {
 }
 
 function showDetail(game, anchor) {
-  // Muestra detalle del juego y botón de Ver reseñas
+  
   const el = ensureDetailOverlay()
   overlayAnchor = anchor
   const rect = anchor.getBoundingClientRect()
@@ -124,7 +124,7 @@ document.addEventListener('keydown', (e) => {
 })
 
 async function loadGameReviews(titulo) {
-  // GET reseñas y filtrado por título exacto
+ 
   try {
     const res = await fetch(`${API_BASE}/api/resenas`)
     if (!res.ok) return []
@@ -134,7 +134,7 @@ async function loadGameReviews(titulo) {
 }
 
 function renderReviewItem(r) {
-  // Render de ítem de reseña dentro del panel del popover
+  
   const stars = '★'.repeat(r.calificacion || 0) + '☆'.repeat(5 - (r.calificacion || 0))
   const when = formatRelative(r.createdAt, r.fecha, r.hora)
   const user = r.usuario || 'Anónimo'
@@ -142,7 +142,7 @@ function renderReviewItem(r) {
 }
 
 function formatRelative(createdAt, fecha, hora) {
-  // Cálculo de tiempo relativo: hoy/ayer/fecha
+  
   const now = new Date()
   if (createdAt) {
     const dt = new Date(createdAt)
@@ -156,7 +156,7 @@ function formatRelative(createdAt, fecha, hora) {
 }
 
 async function renderJuegos() {
-  // Render de grilla y sugerencias según búsqueda
+  
   const container = document.querySelector('.cards-container') || document.querySelector('.games-grid')
   if (!container) return
   if (!allGames.length) allGames = await fetchJuegos()
@@ -179,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 function ensureSuggestionsContainer() {
-  // Contenedor flotante de sugerencias en la cabecera
+
   const header = document.querySelector('.header')
   if (!header) return null
   let box = header.querySelector('.search-suggestions')
@@ -192,7 +192,7 @@ function ensureSuggestionsContainer() {
 }
 
 function renderSearchSuggestions(q) {
-  // Renderiza coincidencias por texto en la cabecera
+ 
   const box = ensureSuggestionsContainer()
   if (!box) return
   if (!q) { box.innerHTML = ''; box.style.display = 'none'; return }

@@ -2,13 +2,13 @@ const API_BASE = 'http://localhost:3000'
 const form = document.getElementById('reviewForm');
 const lista = document.getElementById('listaReseñas'); 
 
-// SISTEMA DE CALIFICACIÓN CON ESTRELLAS
+
 let calificacionSeleccionada = 0; 
-const starRating = document.getElementById('star-rating'); // Elemento contenedor de estrellas
+const starRating = document.getElementById('star-rating'); 
 const ratingText = document.getElementById('rating-text');
 const stars = starRating ? starRating.querySelectorAll('.star') : [];
 
-// Función para actualizar las estrellas visuales
+
 function actualizarEstrellas(rating) {
   stars.forEach((star, index) => {
     star.classList.toggle('selected', index < rating);
@@ -16,12 +16,12 @@ function actualizarEstrellas(rating) {
   });
 }
 
-// Función para actualizar el texto de calificación
+
 function actualizarTextoCalificacion(rating) {
   const textos = ['Pésimo', 'Malo', 'Regular', 'Bueno', 'Excelente'];
   ratingText.textContent = rating > 0 ? `${rating}/5 - ${textos[rating - 1]}` : 'Sin calificación';
   
-  // Añadir efecto de confirmación
+  
   if (rating > 0) {
     ratingText.style.color = '#ffd700';
     ratingText.style.fontWeight = 'bold';
@@ -32,7 +32,7 @@ function actualizarTextoCalificacion(rating) {
   }
 }
 
-// Eventos de interacción en estrellas
+
 if (stars.length) {
   stars.forEach((star, index) => {
     star.addEventListener('click', () => {
@@ -63,7 +63,7 @@ if (stars.length) {
   }
 }
 
-// Restaurar calificación al cargar la página
+
 window.addEventListener('load', () => {
   const calificacionGuardada = localStorage.getItem('calificacionTemporal');
   if (calificacionGuardada) {
@@ -80,11 +80,11 @@ if (document.readyState === 'complete' || document.readyState === 'interactive')
   try { initGameSuggestions() } catch {}
 }
 
-// FORMULARIO DE RESEÑAS
+
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
 
-  // Nombre de usuario desde formulario; si no hay, usar activo o 'Invitado'
+
   const usuario = (document.getElementById('nombreUsuario')?.value.trim()) || localStorage.getItem('usuarioActivo') || 'Invitado';
 
   if (calificacionSeleccionada === 0) {
@@ -115,7 +115,7 @@ form.addEventListener('submit', async (e) => {
   if (creada) {
     mostrarReseña(creada);
     form.reset();
-    // Resetear calificación
+    
     calificacionSeleccionada = 0;
     actualizarEstrellas(0);
     actualizarTextoCalificacion(0);
@@ -126,7 +126,7 @@ form.addEventListener('submit', async (e) => {
   }
 });
 
-// POST reseña (con fallback a LocalStorage)
+
 async function guardarReseña(r) {
   try {
     const resp = await fetch(`${API_BASE}/api/resenas`, {
@@ -145,7 +145,7 @@ async function guardarReseña(r) {
   }
 }
 
-// GET reseñas (con fallback)
+
 async function cargarReseñas() {
   try {
     const resp = await fetch(`${API_BASE}/api/resenas`);
@@ -173,7 +173,7 @@ async function fetchJuegosCatalogo() {
   }
 }
 
-// Crea/inserta contenedor de sugerencias junto al input de juego
+
 function ensureGameSuggestionBox(input) {
   let wrapper = input.parentElement
   if (!wrapper.classList.contains('game-input-wrapper')) {
@@ -192,7 +192,7 @@ function ensureGameSuggestionBox(input) {
   return box
 }
 
-// Renderiza lista de sugerencias con miniatura
+
 function renderGameSuggestions(input, q) {
   const box = ensureGameSuggestionBox(input)
   const query = q.trim().toLowerCase()
@@ -228,7 +228,7 @@ function renderGameSuggestions(input, q) {
   })
 }
 
-// Inicializa caché y listeners de sugerencias
+
 async function initGameSuggestions() {
   juegosCache = await fetchJuegosCatalogo()
   const input = document.getElementById('tituloJuego')
@@ -240,9 +240,9 @@ async function initGameSuggestions() {
   }, 150))
 }
 
-// Render de tarjeta de reseña publicada con acciones
+
 function mostrarReseña(r) {
-  // Crear estrellas para mostrar la calificación
+
   const estrellasHtml = '★'.repeat(r.calificacion || 0) + '☆'.repeat(5 - (r.calificacion || 0));
   
   const card = document.createElement('div');
@@ -354,7 +354,7 @@ function closeEditModal() {
   editingReviewId = null
 }
 
-// PUT likes (con fallback)
+
 async function actualizarLikes(id, nuevosLikes) {
   try {
     await fetch(`${API_BASE}/api/resenas/${id}/likes`, {
@@ -373,7 +373,7 @@ async function actualizarLikes(id, nuevosLikes) {
 }
 
 
-// PUT edición de reseña (con fallback)
+
 async function editarReseña(id, cambios) {
   try {
     const resp = await fetch(`${API_BASE}/api/resenas/${id}`, {
@@ -396,7 +396,7 @@ async function editarReseña(id, cambios) {
   }
 }
 
-// DELETE reseña (con fallback)
+
 async function eliminarReseña(id) {
   try {
     const resp = await fetch(`${API_BASE}/api/resenas/${id}`, {

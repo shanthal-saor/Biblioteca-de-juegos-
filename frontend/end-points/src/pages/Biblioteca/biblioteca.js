@@ -1,88 +1,87 @@
-const API_BASE = 'http://localhost:3000' // se conecta al backend por medio del servidor 3000//
-const addGameBtn = document.getElementById('addGameBtn') //-boton para agregar juegos a la biblioteca (es el que le sa funcionalidad)//
-const gamesSection = document.getElementById('games') //-crea una tarjeta para el juego y la agrega a lapagina//
-let allGames = [] //almacena todos los juegos disponibles//
-let editingId = null //almacena el ID del juego que se está editando este controla el modo crear/editar//
-let userLibrary = [] //almacena los juegos que el usuario creo a su bliblioteca//
+const API_BASE = 'http://localhost:3000' 
+const addGameBtn = document.getElementById('addGameBtn') 
+const gamesSection = document.getElementById('games') 
+let allGames = [] 
+let editingId = null 
+let userLibrary = [] 
 
-function normalizeGame(g) { // el G es el juego que se está normalizando, asume que siempre venga como objeto
-  // Normaliza objetos de juego provenientes del backend/catálogo (es el que los resive)
+function normalizeGame(g) { 
+  
   return {
     id: g.id,
-    titulo: g.titulo || g.name || 'Sin título', // busca el titulo en el juego, si no hay, busca el name, si no hay, pone Sin título
-    cover: g.cover || g.image || '', // busca la cover en el juego, si no hay, busca la image, si no hay, pone una imagen por defecto
-    genero: g.genero || g.genre || '', // busca el genero en el juego, si no hay, busca el genre, si no hay, pone N/D
-    fecha: g.fecha || g.Fechadecreaccion || '', // busca la fecha en el juego, si no hay, busca la Fechadecreaccion, si no hay, pone N/D
-    compania: g.compania || g.company || '', // busca la compania en el juego,puede ser en ingles o en español.
-    descripcion: g.descripcion || g.description || '', // busca la descripcion en el juego,si no hay, pone N/D
-    plataformas: Array.isArray(g.plataformas) ? g.plataformas : [], // si hay plataformas, las convierte en array, si no hay, pone un array vacio
+    titulo: g.titulo || g.name || 'Sin título',
+    cover: g.cover || g.image || '', 
+    genero: g.genero || g.genre || '', 
+    fecha: g.fecha || g.Fechadecreaccion || '', 
+    compania: g.compania || g.company || '', 
+    descripcion: g.descripcion || g.description || '', 
+    plataformas: Array.isArray(g.plataformas) ? g.plataformas : [],
   }
 }
 
-async function fetchJuegos() { // obtiene los juegos del backend y los normaliza, le hace peticiones al API de obtener juegos
-  // GET catálogo de juegos
-  try { // intenta hacer la petición al backend, si no funciona, devuelve un array vacio
-    const res = await fetch(`${API_BASE}/api/juegos`) // hace la petición al backend para obtener los juegos
-    if (!res.ok) throw new Error('No se pudo cargar juegos') // si la petición no es exitosa, lanza un error
-    const data = await res.json() // convierte la respuesta de la base de datos en JSON
-    return Array.isArray(data) ? data.map(normalizeGame) : [] // si es un array, normaliza cada juego y devuelve el array, si no, devuelve un array vacio
-  } catch (e) { return [] } // si hay un error, devuelve un array vacio 
+async function fetchJuegos() { 
+  try { 
+    const res = await fetch(`${API_BASE}/api/juegos`)
+    if (!res.ok) throw new Error('No se pudo cargar juegos') 
+    const data = await res.json() 
+    return Array.isArray(data) ? data.map(normalizeGame) : [] 
+  } catch (e) { return [] } 
 }
 
-function ensureSuggestionsContainer() { //sugerencias que aparece cuando escribes en la barra de busqueda 
+function ensureSuggestionsContainer() {  
   
-  const header = document.querySelector('.header') // busca el encabezado en la pagina
-  if (!header) return null // si no hay encabezado, devuelve null
-  let box = header.querySelector('.search-suggestions')// busca el contenedor de sugerencias en el encabezado
-  if (!box) { box = document.createElement('div'); box.className = 'search-suggestions'; header.appendChild(box) } // si no hay contenedor, crea uno y lo agrega al encabezado
-  return box // plasma el juego encontrado
+  const header = document.querySelector('.header') 
+  if (!header) return null 
+  let box = header.querySelector('.search-suggestions')
+  if (!box) { box = document.createElement('div'); box.className = 'search-suggestions'; header.appendChild(box) }
+  return box 
 }
 
 function renderSearchSuggestions(q) {
-  // Renderiza coincidencias en el dropdown de búsqueda
+ 
   const box = ensureSuggestionsContainer(); if (!box) return
-  if (!q) { box.innerHTML = ''; box.style.display = 'none'; return } // si no hay consulta, limpia el contenedor y lo oculta
-  const matches = allGames.filter(g => g.titulo.toLowerCase().startsWith(q)).slice(0,6) // filtra los juegos que coinciden con la consulta y limita a 6
-  box.innerHTML = matches.map(m => `<div class="suggestion-item" data-id="${m.id}">${m.titulo}</div>`).join('') // renderiza cada juego en el contenedor
-  box.style.display = matches.length ? 'block' : 'none' // si hay coincidencias, muestra el contenedor, si no, lo oculta  
-  box.querySelectorAll('.suggestion-item').forEach(el => { // para cada juego en el contenedor
+  if (!q) { box.innerHTML = ''; box.style.display = 'none'; return } 
+  const matches = allGames.filter(g => g.titulo.toLowerCase().startsWith(q)).slice(0,6) 
+  box.innerHTML = matches.map(m => `<div class="suggestion-item" data-id="${m.id}">${m.titulo}</div>`).join('') 
+  box.style.display = matches.length ? 'block' : 'none' 
+  box.querySelectorAll('.suggestion-item').forEach(el => { 
 
-    // agrega un evento de click a cada juego en el contenedor
-    el.addEventListener('click', () => { // cuando se hace click en el juego
+    
+    el.addEventListener('click', () => { 
       const input = document.getElementById('search')
-      if (input) input.value = el.textContent // pone el titulo del juego en el input de busqueda
-      renderBiblioteca() // renderiza la biblioteca con el juego seleccionado
+      if (input) input.value = el.textContent 
+      renderBiblioteca() 
     })
   })
 }
 
 function loadLibrary() {
-  // Carga biblioteca personal desde LocalStorage (MEMORIA)
-  try { userLibrary = JSON.parse(localStorage.getItem('biblioteca_personal')) || [] } catch { userLibrary = [] } // intenta parsear la biblioteca personal desde LocalStorage, si no funciona, devuelve un array vacio
+  
+  try { userLibrary = JSON.parse(localStorage.getItem('biblioteca_personal')) || [] } catch { userLibrary = [] } 
 }
 
-function saveLibrary() { localStorage.setItem('biblioteca_personal', JSON.stringify(userLibrary)) } // guarda la biblioteca personal en LocalStorage
+function saveLibrary() { localStorage.setItem('biblioteca_personal', JSON.stringify(userLibrary)) } 
 
 
 
-async function renderBiblioteca() { // renderiza la biblioteca con el juego seleccionado, MUESTRA LOS JUEGOS EN PANTALLA
+async function renderBiblioteca() { 
     
-  if (!gamesSection) return // verifica si hay juegos en la seccion
-  if (!allGames.length) allGames = await fetchJuegos() // si no hay juegos en la seccion, obtiene los juegos del backend y los normaliza
+  if (!gamesSection) return 
+  if (!allGames.length) allGames = await fetchJuegos() 
   if (!userLibrary.length) loadLibrary()
   const qEl = document.getElementById('search')
   const q = (qEl && qEl.value) ? qEl.value.trim().toLowerCase() : ''
-  const filtered = q ? userLibrary.filter(g => g.titulo.toLowerCase().startsWith(q)) : userLibrary // filtra los juegos que coinciden con la consulta y limita a 6
+  const filtered = q ? userLibrary.filter(g => g.titulo.toLowerCase().startsWith(q)) : userLibrary 
   gamesSection.innerHTML = ''
-  filtered.forEach(g => gamesSection.appendChild(createCard(g))) // para cada juego en la biblioteca, crea una tarjeta y la agrega al contenedor
+  filtered.forEach(g => gamesSection.appendChild(createCard(g))) 
   renderSearchSuggestions(q)
 }
 
 function createCard(game) {
-  // Construye una tarjeta de juego con acciones según sea propio o agregado
+  
   const card = document.createElement('div')
-  card.className = 'game-card' // crea una tarjeta de juego
-  const own = !!game.own // verifica si el juego es propio o agregado
+  card.className = 'game-card' 
+  const own = !!game.own 
   card.innerHTML = `
     <img src="${game.cover}" alt="${game.titulo}" onerror="this.src='https://via.placeholder.com/280x160?text=No+Image'" />
     <div class="game-info"> // agrega la informacion del juego a la tarjeta
@@ -93,17 +92,17 @@ function createCard(game) {
       </div>
     </div>
   `
-  const editBtn = card.querySelector('.edit-btn') // busca el boton de editar en la tarjeta
-  const deleteBtn = card.querySelector('.delete-btn') // busca el boton de eliminar en la tarjeta
-  const removeBtn = card.querySelector('.remove-btn') // busca el boton de quitar en la tarjeta
-  if (editBtn) editBtn.addEventListener('click', () => openModal('edit', game)) // agrega un evento de click al boton de editar
-  if (deleteBtn) deleteBtn.addEventListener('click', () => deleteGame(game.id)) // agrega un evento de click al boton de eliminar
-  if (removeBtn) removeBtn.addEventListener('click', () => removeFromLibrary(game.id)) // agrega un evento de click al boton de quitar
-  return card // devuelve la tarjeta con los eventos agregados  
+  const editBtn = card.querySelector('.edit-btn') 
+  const deleteBtn = card.querySelector('.delete-btn') 
+  const removeBtn = card.querySelector('.remove-btn') 
+  if (editBtn) editBtn.addEventListener('click', () => openModal('edit', game))
+  if (deleteBtn) deleteBtn.addEventListener('click', () => deleteGame(game.id)) 
+  if (removeBtn) removeBtn.addEventListener('click', () => removeFromLibrary(game.id)) 
+  return card   
 }
 
 function openModal(mode, game) {
-  // Abre modal de crear/editar juego, precargando datos si aplica
+  
   const modal = document.getElementById('addGameModal') 
   const title = document.getElementById('modalTitle')
   const submitBtn = document.getElementById('submitGame')
@@ -121,10 +120,10 @@ function openModal(mode, game) {
 }
 
 function closeModal() { const modal = document.getElementById('addGameModal'); modal.style.display = 'none' } 
-// Cierra el modal de crear/editar juego
 
-document.addEventListener('DOMContentLoaded', () => { // cuando el DOM está cargado, renderiza la biblioteca con el juego seleccionado
-  // Inicialización: render y manejadores de subida de imagen
+
+document.addEventListener('DOMContentLoaded', () => { 
+  
   renderBiblioteca()
   const input = document.getElementById('search') 
   if (input) input.addEventListener('input', () => renderBiblioteca())
@@ -144,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => { // cuando el DOM está car
     }
   })
 })
-// Maneja el evento de click en el boton de agregar juego, mostrando el modal de crear/editar juego
+
 
 document.getElementById('addGameBtn')?.addEventListener('click', () => openModal('create', {}))
 const chooser = document.getElementById('addChooser')
@@ -155,7 +154,7 @@ document.getElementById('chooseCreate')?.addEventListener('click', () => { choos
 document.getElementById('chooseExisting')?.addEventListener('click', () => { chooser.style.display = 'none'; openExistingModal() })
 
 document.getElementById('gameForm')?.addEventListener('submit', async (e) => {
-  // Crear o actualizar juego; añade el creado a la biblioteca vía GET por id
+ 
   e.preventDefault()
   const body = collectGameForm()
   const isEdit = !!editingId
@@ -191,9 +190,8 @@ document.getElementById('gameForm')?.addEventListener('submit', async (e) => {
   } catch (err) { alert('No se pudo guardar el juego') }
 })
 
-// Extrae y estructura datos del formulario de juego
 function collectGameForm() {
-  // Extrae y estructura datos del formulario de juego
+  
   const titulo = document.getElementById('gameTitle').value.trim()
   const cover = document.getElementById('gameCover').value.trim()
   const genero = document.getElementById('gameGenero').value.trim()
@@ -204,7 +202,7 @@ function collectGameForm() {
 }
 
 async function deleteGame(id) {
-  // DELETE juego; sincroniza catálogo y biblioteca personal
+ 
   if (!confirm('¿Eliminar este juego?')) return
   try {
     const resp = await fetch(`${API_BASE}/api/juegos/${id}`, { method: 'DELETE' })
@@ -217,14 +215,14 @@ async function deleteGame(id) {
 }
 
 function removeFromLibrary(id) {
-  // Quita un juego agregado de la biblioteca personal
+  
   userLibrary = userLibrary.filter(g => g.id !== id)
   saveLibrary()
   renderBiblioteca()
 }
 
 function openExistingModal() {
-  // Abre el picker de juegos existentes con búsqueda y multiselección
+ 
   const modal = document.getElementById('addGameModal')
   const title = document.getElementById('modalTitle')
   title.textContent = 'Agregar juego existente'
@@ -241,7 +239,7 @@ function openExistingModal() {
 }
 
 function closeExistingModal() {
-  // Cierra el picker y restaura el formulario
+  
   const modal = document.getElementById('addGameModal')
   document.getElementById('existingPicker').classList.add('hidden')
   document.getElementById('gameForm').classList.remove('hidden')
@@ -250,7 +248,7 @@ function closeExistingModal() {
 
 let selectedExistingIds = new Set()
 async function renderExistingGrid() {
-  // Renderiza la grilla scrollable de juegos existentes con selección
+ 
   if (!allGames.length) allGames = await fetchJuegos()
   const grid = document.getElementById('existingGrid')
   const q = document.getElementById('existingSearch').value.trim().toLowerCase()
@@ -276,7 +274,7 @@ async function renderExistingGrid() {
 }
 
 function addSelectedExisting() {
-  // Agrega los juegos seleccionados del picker a la biblioteca personal
+  
   if (!selectedExistingIds.size) return
   const toAdd = allGames.filter(x => selectedExistingIds.has(x.id))
   toAdd.forEach(g => {
@@ -291,6 +289,3 @@ function addSelectedExisting() {
 }
 
 function buscar() { renderBiblioteca() }
-// === Biblioteca (JS)
-// Función: administrar la biblioteca personal del usuario y CRUD contra /api/juegos
-// Componentes: búsqueda, render de tarjetas, modal crear/editar, picker de existentes
